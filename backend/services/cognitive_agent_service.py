@@ -346,7 +346,14 @@ async def _step_recommendation_engine(
         reductions = _pj(sim_row["projected_risk_reduction"], {})
         tl = _pj(sim_row["timeline_days"], [0, 15, 30, 45, 60, 90, 120])
         idx = {d: i for i, d in enumerate(tl)}
-        for name, scores in scenarios.items():
+        # scenarios also carries a "by_disease" key (nested dict of per-disease
+        # trajectories, added when simulation_service started reporting
+        # diabetes/CVD/hypertension separately) — not a flat score list like
+        # current/improved/optimal. Iterating scenarios.items() blindly and
+        # indexing it as scores[2] raised KeyError: 2 on every real
+        # simulation row. Only the three flat scalar trajectories belong here.
+        for name in ("current", "improved", "optimal"):
+            scores = scenarios.get(name)
             if scores:
                 d30 = scores[idx.get(30, min(2, len(scores)-1))]
                 d90 = scores[idx.get(90, min(5, len(scores)-1))]

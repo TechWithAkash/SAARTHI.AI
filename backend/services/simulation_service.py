@@ -441,6 +441,14 @@ async def run_whatif(user_id: str, overrides: Dict[str, float]) -> Dict[str, Any
     )
 
     keys = ["composite_risk"] + DISEASES
+    # simulate_overrides() -> predict_risk() already computes model_saturated
+    # for both calls; this endpoint used to discard it before returning,
+    # which meant a saturated counterfactual (e.g. a disease pinned at exactly
+    # 0.0 — the same XGBoost-extrapolation failure mode fixed for the main
+    # risk score) would render as a confident number with no warning the
+    # instant this became a real interactive UI. Surfaced the same way the
+    # dashboard already does, not swallowed here.
+    saturated = bool(baseline.get("model_saturated") or counterfactual.get("model_saturated"))
     return {
         "user_id":        user_id,
         "baseline_state": {k: base.get(k) for k in MODIFIABLE},
@@ -450,9 +458,11 @@ async def run_whatif(user_id: str, overrides: Dict[str, float]) -> Dict[str, Any
         "counterfactual": {k: counterfactual[k] for k in keys},
         "delta":          {k: round(counterfactual[k] - baseline[k], 2) for k in keys},
         "risk_category":  counterfactual["risk_category"],
+        "model_saturated": saturated,
         "note": (
             "Projects sustaining this state for 30 days. Deltas are model "
             "output differences, not a clinical guarantee."
+            + (" Model confidence is reduced for this input — treat the numbers as indicative." if saturated else "")
         ),
     }
 

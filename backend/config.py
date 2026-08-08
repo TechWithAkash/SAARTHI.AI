@@ -33,6 +33,13 @@ class Settings(BaseSettings):
     openaq_api_key: str = ""
     default_city: str = "Mumbai"
 
+    # ── Clinical guideline RAG (rag.py, reused unmodified) ──────────────────
+    # Directory of .md clinical guideline documents. Does not exist as shipped
+    # — personalized_rag_service degrades gracefully with no guideline context
+    # until real documents are added here (fabricating clinical guideline text
+    # ourselves is not an acceptable substitute).
+    rag_corpus_dir: str = "guideline_corpus"
+
     # extra="ignore" so an unrecognised key in .env degrades to a warning-free
     # no-op instead of crashing boot. The previous strict default meant adding
     # GARMIN_EMAIL to .env took the whole API down at import time.

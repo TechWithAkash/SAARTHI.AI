@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api, type SimulationResponse, type Recommendation, type AgentMeta } from "@/lib/api";
 import SimulationChart from "@/components/SimulationChart";
 import AgentTrace from "@/components/AgentTrace";
+import WhatIfSimulator from "@/components/WhatIfSimulator";
 
 export default function SimulationPage() {
   const [sim, setSim] = useState<SimulationResponse | null>(null);
@@ -76,6 +77,9 @@ export default function SimulationPage() {
           projectedReduction={sim.projected_risk_reduction}
         />
       </div>
+
+      {/* ── 2b. INTERACTIVE WHAT-IF PREDICTOR ── */}
+      {userId && <WhatIfSimulator userId={userId} />}
 
       {/* ── 3. THREE SCENARIO CARDS ── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -75,6 +75,44 @@ export interface SimulationResponse {
   generated_at: string;
 }
 
+// The interactive "what if" predictor — POST /simulate/whatif. Scores the
+// user's current state and one counterfactual through the same ensemble,
+// ~5ms server time, safe to call on debounced slider drag.
+export interface WhatIfState {
+  composite_risk: number;
+  diabetes_risk: number;
+  cvd_risk: number;
+  hypertension_risk: number;
+}
+
+export interface WhatIfResponse {
+  user_id: string;
+  baseline_state: {
+    sleep: number; steps: number; stress_level: number;
+    diet_score: number; heart_rate: number; bmi: number;
+  };
+  applied: Record<string, number>;
+  rejected: string[];
+  baseline: WhatIfState;
+  counterfactual: WhatIfState;
+  delta: WhatIfState;
+  risk_category: string;
+  // True when this input pushed the ensemble outside its normal operating
+  // range (the same saturation guard as the live dashboard score) — show a
+  // caution state instead of trusting the number outright.
+  model_saturated: boolean;
+  note: string;
+}
+
+export interface WhatIfOverrides {
+  sleep?: number;
+  steps?: number;
+  stress_level?: number;
+  diet_score?: number;
+  heart_rate?: number;
+  bmi?: number;
+}
+
 export interface Recommendation {
   priority: number;
   action: string;
@@ -229,6 +267,8 @@ export const api = {
     get<RiskResponse[]>(`/risk/history?user_id=${encodeURIComponent(userId)}`),
   getSimulation: (userId: string) =>
     get<SimulationResponse>(`/simulate?user_id=${encodeURIComponent(userId)}`),
+  postWhatIf: (userId: string, overrides: WhatIfOverrides) =>
+    post<WhatIfResponse>("/simulate/whatif", { user_id: userId, ...overrides }),
   getRecommend: (userId: string) =>
     get<RecommendResponse>(`/recommend?user_id=${encodeURIComponent(userId)}`),
   getInsights: (userId: string) =>

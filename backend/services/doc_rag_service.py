@@ -46,9 +46,19 @@ _SESSION_TTL_SECONDS = 7200  # 2 hours
 # ── Text extraction ───────────────────────────────────────────────────────────
 
 def _extract_pdf(data: bytes) -> str:
-    """Extract text from a PDF using pdfplumber (handles tables + paragraphs)."""
+    """
+    Extract text from a PDF, column-aware + noise-filtered.
+
+    Previously used plain pdfplumber.extract_text(), which interleaves both
+    columns of a two-column academic layout by vertical position into
+    nonsense (e.g. "Diabetes is a chronic metabolic disorder char- Data
+    source and study population"). A user uploading exactly this kind of
+    document — a real research paper — saw that garbled text as the
+    "document loaded" preview. Now shares the fix already built for the
+    clinical-guideline corpus builder instead of reimplementing it here.
+    """
     try:
-        import pdfplumber
+        from backend.services.pdf_extraction import extract_pdf_text
     except ImportError as e:
         # Previously this ImportError bubbled up as an opaque HTTP 500
         # ("Processing failed") from chat.py's generic handler. Name the real
@@ -58,23 +68,7 @@ def _extract_pdf(data: bytes) -> str:
             "installed in this environment. Run: pip install pdfplumber"
         ) from e
 
-    text_parts = []
-    with pdfplumber.open(io.BytesIO(data)) as pdf:
-        for i, page in enumerate(pdf.pages):
-            # Extract tables first (medical labs are often tabular)
-            tables = page.extract_tables()
-            for table in tables:
-                for row in table:
-                    clean = [str(c).strip() if c else "" for c in row]
-                    if any(clean):
-                        text_parts.append(" | ".join(clean))
-
-            # Extract remaining text
-            txt = page.extract_text()
-            if txt:
-                text_parts.append(txt)
-
-    return "\n".join(text_parts)
+    return extract_pdf_text(data)
 
 
 def _extract_image(data: bytes, filename: str) -> str:
@@ -169,6 +163,41 @@ def _build_index(chunks: list[str]):
     return vectorizer, matrix
 
 
+# Academic PDFs extract with the journal name, issue number, DOI, and
+# "RESEARCH Open Access" badge as their first lines, before the title and
+# abstract — and pdfplumber sometimes joins those short masthead fragments
+# into one single extracted line long enough to fool a plain length
+# threshold. Taking a blind text[:N] (or "first line over N chars") surfaced
+# that masthead as the "preview" a user sees right after uploading, which
+# reads as broken even once the extraction itself (see pdf_extraction.py) is
+# no longer literally garbled.
+#
+# "Abstract" is a near-universal structural marker in academic papers — far
+# more reliable than a length guess. When present, start the preview right
+# after it. Genuine clinical documents (lab reports, discharge summaries)
+# don't have this marker, so the length-based fallback still covers those.
+_ABSTRACT_MARKER = re.compile(r"\b(abstract|background)\b\s*:?", re.IGNORECASE)
+_MIN_PREVIEW_LINE_LEN = 60
+
+
+def _build_preview(text: str, target_len: int = 280) -> str:
+    """First substantial run of real prose, not the first N raw characters."""
+    m = _ABSTRACT_MARKER.search(text)
+    if m and len(text) - m.end() >= 80:
+        return text[m.end():].strip()[:target_len].strip()
+
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    start = next((i for i, l in enumerate(lines) if len(l) >= _MIN_PREVIEW_LINE_LEN), 0)
+
+    preview = ""
+    for line in lines[start:]:
+        preview = (preview + " " + line).strip() if preview else line
+        if len(preview) >= target_len:
+            break
+
+    return preview[:target_len].strip()
+
+
 # ── Public API ────────────────────────────────────────────────────────────────
 
 async def ingest_document(
@@ -214,7 +243,7 @@ async def ingest_document(
         "session_id":  session_id,
         "filename":    filename,
         "chunk_count": len(chunks),
-        "preview":     text[:300].replace("\n", " ").strip(),
+        "preview":     _build_preview(text),
     }
 
 

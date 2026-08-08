@@ -17,3 +17,5 @@ dist/
 # Garmin Connect — auth tokens and cached health payloads (BP-6)
 .garmin_tokens
 .garmin_cache/
+.research_paper/
+backend/.research_papers/

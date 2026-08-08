@@ -22,8 +22,17 @@ dowhy==0.11.1
 
 # Anomaly detection (sklearn IsolationForest; merlion was never used)
 
-# Memory
+# Memory — mem0's pgvector store needs psycopg2 directly (separate from the
+# app's own asyncpg driver), and its HuggingFace embedder needs
+# sentence-transformers. Both were missing on a clean install; mem0 silently
+# no-op'd (store_health_observation had zero effect) until they were added.
 mem0ai==0.1.29
+psycopg2-binary==2.9.12
+sentence-transformers==5.7.0
+transformers==5.14.1
+tokenizers==0.22.2
+huggingface-hub==1.24.0
+safetensors==0.8.0
 
 # LLM
 groq==0.11.0

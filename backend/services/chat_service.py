@@ -16,6 +16,7 @@ from backend.config import settings
 from backend.db.postgres import get_db
 from backend.services.memory_service import get_user_context
 from backend.services.doc_rag_service import retrieve_context
+from backend.services.personalized_rag_service import format_guideline_context
 
 _groq: Optional[AsyncGroq] = None
 
@@ -65,7 +66,12 @@ async def _fetch_health_context(user_id: str) -> Dict:
     }
 
 
-def _build_system_prompt(ctx: Dict, memories: List[str], doc_context: Optional[str] = None) -> str:
+def _build_system_prompt(
+    ctx: Dict,
+    memories: List[str],
+    doc_context: Optional[str] = None,
+    guideline_context: Optional[str] = None,
+) -> str:
     risk = ctx.get("risk")
     shap = ctx.get("shap")
     causal = ctx.get("causal")
@@ -79,18 +85,44 @@ def _build_system_prompt(ctx: Dict, memories: List[str], doc_context: Optional[s
         top_factors = _pj(risk["top_risk_factors"], [])
         risk_section = f"Risk Score: {score}/100 ({category})\nTop risk factors: {', '.join(top_factors)}"
     else:
-        risk_section = "Risk Score: Not yet assessed"
+        # Deliberately explicit rather than just "Not yet assessed" — found by
+        # testing this end-to-end for a user with genuinely zero data anywhere
+        # (SQL and mem0 both empty): the model still confidently claimed a
+        # specific "primary cause of your risk score" with nothing behind it.
+        # A vague absence in the prompt wasn't enough to stop it from filling
+        # the gap with something plausible-sounding.
+        risk_section = (
+            "Risk Score: NO DATA — this patient has not submitted a health "
+            "check-in yet. Do not state or imply a risk score, category, or "
+            "primary risk factor. Tell them plainly that no assessment "
+            "exists yet and invite them to submit vitals."
+        )
 
     # SHAP section
     shap_section = ""
     if shap:
-        contributions = _pj(shap["shap_contributions"], {})
+        raw_contributions = _pj(shap["shap_contributions"], {})
+        # explain_service.py's Block A rewrite started storing a nested
+        # structure here — {icmr, legacy, per_disease, explains,
+        # explained_fraction} — but this code still expected the old flat
+        # {feature: value} shape directly. Reading the dict-valued "icmr" or
+        # "per_disease" entries as if they were numbers crashed every chat
+        # request with TypeError: bad operand type for abs(): 'dict',
+        # surfacing to users as a generic "Connection failed" — nothing to
+        # do with the Groq API key. "legacy" is the flat view chat_service
+        # needs; the isinstance filter is a defensive fallback for either
+        # shape so a future field-shape change degrades instead of crashing.
+        contributions = raw_contributions.get("legacy", raw_contributions)
+        contributions = {
+            k: v for k, v in contributions.items()
+            if isinstance(v, (int, float)) and not isinstance(v, bool)
+        }
         drivers = _pj(shap["risk_drivers"], [])
         protective = _pj(shap["protective_factors"], [])
         shap_lines = "\n".join(
             f"  • {k}: {v:+.2f} pts ({'increases' if v > 0 else 'reduces'} risk)"
             for k, v in sorted(contributions.items(), key=lambda x: -abs(x[1]))[:6]
-        )
+        ) or "  (no per-feature breakdown available)"
         driver_names = [d.get("label", d.get("feature", "")) for d in drivers[:3]]
         prot_names = [p.get("label", p.get("feature", "")) for p in protective[:2]]
         shap_section = f"""
@@ -157,9 +189,22 @@ Health History (from mem0):
 • Quote specific lab values, dates, and findings verbatim from the document
 • Cross-reference document findings against the patient's live risk profile"""
 
+    # Clinical-guideline RAG (rag.py, via personalized_rag_service). Kept as
+    # its own block, never merged into PATIENT HEALTH PROFILE above — the
+    # distinction between "what the guideline says generally" and "what
+    # this patient's own data shows" is exactly the thing a health app must
+    # never blur, and the instructions below say so explicitly.
+    guideline_section = f"\n{guideline_context}\n" if guideline_context else ""
+    guideline_instructions = ""
+    if guideline_context:
+        guideline_instructions = """
+• When citing the CLINICAL GUIDELINE CONTEXT, mark it as general evidence (e.g. "guidelines suggest...")
+• Never present a guideline citation as if it were this patient's own measured data
+• Cite excerpts as [G1], [G2] etc. matching the labels shown"""
+
     return f"""You are Darpan, the Agentic Cognitive Health Twin assistant built into DarpanAI.
 You have full access to this patient's health data and speak with clinical precision combined with empathy.
-{doc_section}
+{doc_section}{guideline_section}
 ═══ PATIENT HEALTH PROFILE ═══
 {risk_section}
 {vitals_section}
@@ -173,10 +218,11 @@ You have full access to this patient's health data and speak with clinical preci
 • Answer what-if questions ("what if my stress drops to 3?") using the patient's data
 • Interpret simulation projections and recommend specific interventions
 • Explain the causal chain driving their risk
-• Compare current readings to healthy benchmarks{doc_instructions}
+• Compare current readings to healthy benchmarks{doc_instructions}{guideline_instructions}
 
 ═══ RULES ═══
 • Always reference the patient's ACTUAL numbers, not generic advice
+• If Risk Score says NO DATA, never invent a score, category, or "primary cause" — say plainly that none exists yet
 • Use markdown for structure when helpful (bold, bullet points)
 • Keep responses focused and under 200 words unless depth is needed
 • Never prescribe medications — lifestyle and behavioral interventions only
@@ -278,7 +324,16 @@ async def stream_chat(
     if doc_session_id:
         doc_context = retrieve_context(doc_session_id, message, top_k=4)
 
-    system_prompt = _build_system_prompt(ctx, memories, doc_context=doc_context)
+    # Static clinical-guideline retrieval (rag.py, via personalized_rag_service).
+    # Independent of mem0 — this is TF-IDF over documents, not a network call —
+    # so a slow/failing guideline lookup should never block the chat response.
+    guideline_context: Optional[str] = None
+    try:
+        guideline_context = format_guideline_context(message, top_k=4)
+    except Exception as e:
+        print(f"[chat_service] guideline RAG skipped (non-fatal): {e}")
+
+    system_prompt = _build_system_prompt(ctx, memories, doc_context=doc_context, guideline_context=guideline_context)
 
     # Build message list (last 8 turns to stay within token budget)
     msgs = [{"role": "system", "content": system_prompt}]

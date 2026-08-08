@@ -13,6 +13,7 @@ from backend.services.causal_service import run_causal
 from backend.services.simulation_service import run_simulation
 from backend.services.cognitive_agent_service import run_cognitive_agent
 from backend.services.telegram_service import send_health_alert, send_anomaly_alert
+from backend.services.memory_service import store_health_observation
 from backend.db.postgres import get_db
 
 router = APIRouter()
@@ -88,6 +89,8 @@ async def run_full_pipeline(
 
     # explain / causal / simulation all read the risk_scores row compute_risk
     # writes — running them without it would explain or simulate nothing real.
+    explain_result: Optional[dict] = None
+    causal_result: Optional[dict] = None
     if risk_result is not None:
         for stage, coro in (
             ("explain", explain_risk(user_id, log_id, normalized, risk_score)),
@@ -96,7 +99,11 @@ async def run_full_pipeline(
         ):
             t0 = time.monotonic()
             try:
-                await coro
+                result = await coro
+                if stage == "explain":
+                    explain_result = result
+                elif stage == "causal":
+                    causal_result = result
                 _record_stage(log_id, stage, True, None, (time.monotonic() - t0) * 1000)
             except Exception as e:
                 print(f"[pipeline] {log_id}: {stage} FAILED: {e}")
@@ -104,6 +111,31 @@ async def run_full_pipeline(
     else:
         for stage in ("explain", "causal", "simulation"):
             _record_stage(log_id, stage, False, "skipped: risk stage did not complete", 0.0)
+
+    # Persist this check-in into vector memory (mem0/pgvector) so it's
+    # retrievable context for future chat questions — real-time Garmin data
+    # included, since this runs for every source, not just manual entries.
+    # Previously wired to nothing: store_health_observation existed but had
+    # zero callers anywhere in the app, so mem0's memory store was always
+    # empty regardless of how much real health data existed.
+    if risk_result is not None:
+        t0 = time.monotonic()
+        try:
+            stored = await store_health_observation(
+                user_id,
+                health_data=raw,
+                risk_score=risk_score,
+                risk_category=risk_category,
+                shap_contributions=(explain_result or {}).get("shap_contributions", {}),
+                causal_chain=(causal_result or {}).get("causal_chain", ""),
+                primary_cause=(causal_result or {}).get("primary_cause", ""),
+            )
+            _record_stage(log_id, "memory", stored, None if stored else "mem0 unavailable", (time.monotonic() - t0) * 1000)
+        except Exception as e:
+            print(f"[pipeline] {log_id}: memory FAILED: {e}")
+            _record_stage(log_id, "memory", False, str(e), (time.monotonic() - t0) * 1000)
+    else:
+        _record_stage(log_id, "memory", False, "skipped: risk stage did not complete", 0.0)
 
     agent_result = None
     t0 = time.monotonic()

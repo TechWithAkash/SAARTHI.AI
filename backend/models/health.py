@@ -97,6 +97,7 @@ class WhatIfResponse(BaseModel):
     counterfactual: dict
     delta: dict
     risk_category: str
+    model_saturated: bool = False
     note: str
 
 

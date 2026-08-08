@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from backend.db.postgres import connect_db, close_db
-from backend.routes import health_data, risk, simulate, insights, recommend, alerts, chat, memory, telegram as telegram_route, arena, profile, garmin, environment
+from backend.routes import health_data, risk, simulate, insights, recommend, alerts, chat, memory, telegram as telegram_route, arena, profile, garmin, environment, rag as rag_route
 from backend.services.telegram_service import start_bot_polling
 from backend.services.ensemble_service import get_ensemble
 from backend.services.memory_service import _get_memory
@@ -58,6 +58,7 @@ app.include_router(arena.router, tags=["Model Arena"])
 app.include_router(profile.router, tags=["Profile"])
 app.include_router(garmin.router, tags=["Wearables"])
 app.include_router(environment.router, tags=["Environment"])
+app.include_router(rag_route.router, tags=["RAG"])
 
 
 @app.get("/health", tags=["System"])
