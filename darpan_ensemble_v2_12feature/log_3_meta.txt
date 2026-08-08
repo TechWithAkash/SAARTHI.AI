@@ -1,0 +1,19 @@
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:121: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=n_layers)
+/home/soc/.local/share/.cache-icmr/venv/lib/python3.12/site-packages/xgboost/core.py:751: UserWarning: [03:40:30] WARNING: /__w/xgboost/xgboost/src/common/error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.
+Potential solutions:
+- Use a data structure that matches the device ordinal in the booster.
+- Set the device for booster before call to inplace_predict.
+
+This warning will only be shown once.
+
+  return func(**kwargs)
+
+==================================================
+  12-FEATURE ENSEMBLE FINAL RESULTS
+  ---------------------------------
+  Diabetes        R²=0.9953  MAE=1.28%
+  CVD             R²=0.9972  MAE=1.03%
+  Hypertension    R²=0.9934  MAE=1.62%
+==================================================
+

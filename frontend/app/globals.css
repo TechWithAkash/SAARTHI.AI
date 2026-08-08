@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-green-primary: #22C55E;
+  --color-green-soft: #86EFAC;
+  --color-green-light: #ECFDF5;
+  --color-green-dark: #16A34A;
+  --color-green-muted: #DCFCE7;
+}
+
+body {
+  background: #F9FAFB;
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ── Google Translate Widget ─────────────────────────────────────────────── */
+
+/* Suppress Google's injected top bar */
+body { top: 0 !important; }
+.goog-te-banner-frame { display: none !important; }
+.skiptranslate > iframe { display: none !important; }
+
+/* Position the widget at the sidebar bottom */
+#google_translate_element {
+  position: fixed;
+  bottom: 6.5rem;
+  left: 0;
+  width: 16rem;
+  z-index: 9000;
+  padding: 0.25rem 1rem;
+}
+@media (min-width: 1280px) {
+  #google_translate_element { width: 18rem; }
+}
+
+/* Hide Google's logo and "Powered by" text */
+.goog-te-gadget > span,
+.goog-logo-link { display: none !important; }
+.goog-te-gadget { font-size: 0 !important; }
+
+/* Style the select dropdown to match sidebar */
+.goog-te-combo {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.875rem;
+  padding: 0.55rem 2.25rem 0.55rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.goog-te-combo:hover {
+  border-color: #a5b4fc;
+}
+.goog-te-combo:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}

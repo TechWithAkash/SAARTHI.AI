@@ -1,0 +1,4352 @@
+{
+  "nodes": [
+    {
+      "id": "agent_scripts_checklist_py",
+      "label": "checklist.py",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "checklist_colors",
+      "label": "Colors",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "checklist_print_header",
+      "label": "print_header()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "checklist_print_step",
+      "label": "print_step()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "checklist_print_success",
+      "label": "print_success()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "checklist_print_warning",
+      "label": "print_warning()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "checklist_print_error",
+      "label": "print_error()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L54"
+    },
+    {
+      "id": "checklist_check_script_exists",
+      "label": "check_script_exists()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "checklist_run_script",
+      "label": "run_script()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L76"
+    },
+    {
+      "id": "checklist_print_summary",
+      "label": "print_summary()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L128"
+    },
+    {
+      "id": "checklist_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "checklist_rationale_73",
+      "label": "Check if script file exists",
+      "file_type": "rationale",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "checklist_rationale_77",
+      "label": "Run a validation script and capture results          Returns:         dict with",
+      "file_type": "rationale",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L77"
+    },
+    {
+      "id": "checklist_rationale_129",
+      "label": "Print final summary report",
+      "file_type": "rationale",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L129"
+    },
+    {
+      "id": "agent_scripts_session_manager_py",
+      "label": "session_manager.py",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "session_manager_get_project_root",
+      "label": "get_project_root()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "session_manager_analyze_package_json",
+      "label": "analyze_package_json()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "session_manager_count_files",
+      "label": "count_files()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L56"
+    },
+    {
+      "id": "session_manager_detect_features",
+      "label": "detect_features()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "session_manager_print_status",
+      "label": "print_status()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L82"
+    },
+    {
+      "id": "session_manager_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "agent_scripts_auto_preview_py",
+      "label": "auto_preview.py",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "auto_preview_get_project_root",
+      "label": "get_project_root()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "auto_preview_is_running",
+      "label": "is_running()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "auto_preview_get_start_command",
+      "label": "get_start_command()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "auto_preview_start_server",
+      "label": "start_server()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "auto_preview_stop_server",
+      "label": "stop_server()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L89"
+    },
+    {
+      "id": "auto_preview_status_server",
+      "label": "status_server()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L108"
+    },
+    {
+      "id": "auto_preview_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L133"
+    },
+    {
+      "id": "agent_scripts_verify_all_py",
+      "label": "verify_all.py",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "verify_all_colors",
+      "label": "Colors",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "verify_all_print_header",
+      "label": "print_header()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L43"
+    },
+    {
+      "id": "verify_all_print_step",
+      "label": "print_step()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "verify_all_print_success",
+      "label": "print_success()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "verify_all_print_warning",
+      "label": "print_warning()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L54"
+    },
+    {
+      "id": "verify_all_print_error",
+      "label": "print_error()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "verify_all_run_script",
+      "label": "run_script()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L150"
+    },
+    {
+      "id": "verify_all_print_final_report",
+      "label": "print_final_report()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L202"
+    },
+    {
+      "id": "verify_all_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L263"
+    },
+    {
+      "id": "verify_all_rationale_151",
+      "label": "Run validation script",
+      "file_type": "rationale",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L151"
+    },
+    {
+      "id": "verify_all_rationale_203",
+      "label": "Print comprehensive final report",
+      "file_type": "rationale",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L203"
+    },
+    {
+      "id": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "label": "mobile_audit.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "mobile_audit_mobileauditor",
+      "label": "MobileAuditor",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "mobile_audit_mobileauditor_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L75"
+    },
+    {
+      "id": "mobile_audit_mobileauditor_audit_file",
+      "label": ".audit_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "mobile_audit_mobileauditor_audit_directory",
+      "label": ".audit_directory()",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L613"
+    },
+    {
+      "id": "mobile_audit_mobileauditor_get_report",
+      "label": ".get_report()",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L621"
+    },
+    {
+      "id": "mobile_audit_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L631"
+    },
+    {
+      "id": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "label": "seo_checker.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "seo_checker_is_page_file",
+      "label": "is_page_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "seo_checker_find_pages",
+      "label": "find_pages()",
+      "file_type": "code",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L78"
+    },
+    {
+      "id": "seo_checker_check_page",
+      "label": "check_page()",
+      "file_type": "code",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L96"
+    },
+    {
+      "id": "seo_checker_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "seo_checker_rationale_49",
+      "label": "Check if this file is likely a public-facing page.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L49"
+    },
+    {
+      "id": "seo_checker_rationale_79",
+      "label": "Find page files to check.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "seo_checker_rationale_97",
+      "label": "Check a single page for SEO issues.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L97"
+    },
+    {
+      "id": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "label": "security_scan.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "security_scan_scan_dependencies",
+      "label": "scan_dependencies()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L97"
+    },
+    {
+      "id": "security_scan_scan_secrets",
+      "label": "scan_secrets()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L181"
+    },
+    {
+      "id": "security_scan_scan_code_patterns",
+      "label": "scan_code_patterns()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L236"
+    },
+    {
+      "id": "security_scan_scan_configuration",
+      "label": "scan_configuration()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L296"
+    },
+    {
+      "id": "security_scan_run_full_scan",
+      "label": "run_full_scan()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L372"
+    },
+    {
+      "id": "security_scan_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L421"
+    },
+    {
+      "id": "security_scan_rationale_98",
+      "label": "Validate supply chain security (OWASP A03).     Checks: npm audit, lock file pre",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L98"
+    },
+    {
+      "id": "security_scan_rationale_182",
+      "label": "Validate no hardcoded secrets (OWASP A04).     Checks: API keys, tokens, passwor",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L182"
+    },
+    {
+      "id": "security_scan_rationale_237",
+      "label": "Validate dangerous code patterns (OWASP A05).     Checks: Injection risks, XSS,",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L237"
+    },
+    {
+      "id": "security_scan_rationale_297",
+      "label": "Validate security configuration (OWASP A02).     Checks: Security headers, CORS,",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L297"
+    },
+    {
+      "id": "security_scan_rationale_373",
+      "label": "Execute security validation scans.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L373"
+    },
+    {
+      "id": "agent_skills_database_design_scripts_schema_validator_py",
+      "label": "schema_validator.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "schema_validator_find_schema_files",
+      "label": "find_schema_files()",
+      "file_type": "code",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "schema_validator_validate_prisma_schema",
+      "label": "validate_prisma_schema()",
+      "file_type": "code",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "schema_validator_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L94"
+    },
+    {
+      "id": "schema_validator_rationale_30",
+      "label": "Find database schema files.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "schema_validator_rationale_48",
+      "label": "Validate Prisma schema file.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "label": "i18n_checker.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "i18n_checker_find_locale_files",
+      "label": "find_locale_files()",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "i18n_checker_check_locale_completeness",
+      "label": "check_locale_completeness()",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "i18n_checker_flatten_keys",
+      "label": "flatten_keys()",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L120"
+    },
+    {
+      "id": "i18n_checker_check_hardcoded_strings",
+      "label": "check_hardcoded_strings()",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L131"
+    },
+    {
+      "id": "i18n_checker_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "i18n_checker_rationale_54",
+      "label": "Find translation/locale files.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L54"
+    },
+    {
+      "id": "i18n_checker_rationale_71",
+      "label": "Check if all locales have the same keys.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L71"
+    },
+    {
+      "id": "i18n_checker_rationale_121",
+      "label": "Flatten nested dict keys.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "i18n_checker_rationale_132",
+      "label": "Check for hardcoded strings in code files.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "label": "test_runner.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "test_runner_detect_test_framework",
+      "label": "detect_test_framework()",
+      "file_type": "code",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "test_runner_run_tests",
+      "label": "run_tests()",
+      "file_type": "code",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L79"
+    },
+    {
+      "id": "test_runner_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L140"
+    },
+    {
+      "id": "test_runner_rationale_28",
+      "label": "Detect test framework and commands.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L28"
+    },
+    {
+      "id": "test_runner_rationale_80",
+      "label": "Run tests and return results.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L80"
+    },
+    {
+      "id": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "label": "lighthouse_audit.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "lighthouse_audit_run_lighthouse",
+      "label": "run_lighthouse()",
+      "file_type": "code",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "lighthouse_audit_get_summary",
+      "label": "get_summary()",
+      "file_type": "code",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L60"
+    },
+    {
+      "id": "lighthouse_audit_rationale_17",
+      "label": "Run Lighthouse audit on URL.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "lighthouse_audit_rationale_61",
+      "label": "Generate summary based on scores.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "label": "playwright_runner.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "playwright_runner_run_basic_test",
+      "label": "run_basic_test()",
+      "file_type": "code",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "playwright_runner_run_accessibility_check",
+      "label": "run_accessibility_check()",
+      "file_type": "code",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L115"
+    },
+    {
+      "id": "playwright_runner_rationale_32",
+      "label": "Run basic browser test on URL.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "playwright_runner_rationale_116",
+      "label": "Run basic accessibility check.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L116"
+    },
+    {
+      "id": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "label": "convert_rules.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "convert_rules_parse_frontmatter",
+      "label": "parse_frontmatter()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L65"
+    },
+    {
+      "id": "convert_rules_parse_rule_file",
+      "label": "parse_rule_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L85"
+    },
+    {
+      "id": "convert_rules_group_rules_by_section",
+      "label": "group_rules_by_section()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L108"
+    },
+    {
+      "id": "convert_rules_generate_section_file",
+      "label": "generate_section_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L128"
+    },
+    {
+      "id": "convert_rules_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L185"
+    },
+    {
+      "id": "convert_rules_rationale_66",
+      "label": "Parse markdown frontmatter and body",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "convert_rules_rationale_86",
+      "label": "Parse a single rule file",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "convert_rules_rationale_109",
+      "label": "Group all rules by their section prefix",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "convert_rules_rationale_129",
+      "label": "Generate a merged section file",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L129"
+    },
+    {
+      "id": "convert_rules_rationale_186",
+      "label": "Main conversion function",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L186"
+    },
+    {
+      "id": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "label": "react_performance_checker.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "react_performance_checker_performancechecker",
+      "label": "PerformanceChecker",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_waterfalls",
+      "label": ".check_waterfalls()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_barrel_imports",
+      "label": ".check_barrel_imports()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_dynamic_imports",
+      "label": ".check_dynamic_imports()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_useeffect_fetching",
+      "label": ".check_useEffect_fetching()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L107"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_missing_memoization",
+      "label": ".check_missing_memoization()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L131"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_check_image_optimization",
+      "label": ".check_image_optimization()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_generate_report",
+      "label": ".generate_report()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L181"
+    },
+    {
+      "id": "react_performance_checker_performancechecker_run",
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L217"
+    },
+    {
+      "id": "react_performance_checker_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L234"
+    },
+    {
+      "id": "react_performance_checker_rationale_22",
+      "label": "Check for sequential await patterns (Section 1)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "react_performance_checker_rationale_47",
+      "label": "Check for barrel imports (Section 2)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "react_performance_checker_rationale_73",
+      "label": "Check if large components use dynamic imports (Section 2)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "react_performance_checker_rationale_108",
+      "label": "Check for data fetching in useEffect (Section 4)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L108"
+    },
+    {
+      "id": "react_performance_checker_rationale_132",
+      "label": "Check for missing React.memo, useMemo, useCallback (Section 5)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "react_performance_checker_rationale_159",
+      "label": "Check for unoptimized images (Section 6)",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L159"
+    },
+    {
+      "id": "react_performance_checker_rationale_182",
+      "label": "Generate final report",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L182"
+    },
+    {
+      "id": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "label": "ux_audit.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "ux_audit_uxauditor",
+      "label": "UXAuditor",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L98"
+    },
+    {
+      "id": "ux_audit_uxauditor_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L99"
+    },
+    {
+      "id": "ux_audit_uxauditor_audit_file",
+      "label": ".audit_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L105"
+    },
+    {
+      "id": "ux_audit_uxauditor_audit_directory",
+      "label": ".audit_directory()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L674"
+    },
+    {
+      "id": "ux_audit_uxauditor_get_report",
+      "label": ".get_report()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L682"
+    },
+    {
+      "id": "ux_audit_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L691"
+    },
+    {
+      "id": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "label": "accessibility_checker.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "accessibility_checker_find_html_files",
+      "label": "find_html_files()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "accessibility_checker_check_accessibility",
+      "label": "check_accessibility()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "accessibility_checker_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L111"
+    },
+    {
+      "id": "accessibility_checker_rationale_31",
+      "label": "Find all HTML/JSX/TSX files.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "accessibility_checker_rationale_45",
+      "label": "Check a single file for accessibility issues.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "agent_skills_api_patterns_scripts_api_validator_py",
+      "label": "api_validator.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_validator_find_api_files",
+      "label": "find_api_files()",
+      "file_type": "code",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "api_validator_check_openapi_spec",
+      "label": "check_openapi_spec()",
+      "file_type": "code",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "api_validator_check_api_code",
+      "label": "check_api_code()",
+      "file_type": "code",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L94"
+    },
+    {
+      "id": "api_validator_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "api_validator_rationale_19",
+      "label": "Find API-related files.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "api_validator_rationale_38",
+      "label": "Check OpenAPI/Swagger specification.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "api_validator_rationale_95",
+      "label": "Check API code for common issues.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "label": "geo_checker.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "geo_checker_is_page_file",
+      "label": "is_page_file()",
+      "file_type": "code",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "geo_checker_find_web_pages",
+      "label": "find_web_pages()",
+      "file_type": "code",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "geo_checker_check_page",
+      "label": "check_page()",
+      "file_type": "code",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L99"
+    },
+    {
+      "id": "geo_checker_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L222"
+    },
+    {
+      "id": "geo_checker_rationale_48",
+      "label": "Check if this file is likely a public-facing page.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L48"
+    },
+    {
+      "id": "geo_checker_rationale_82",
+      "label": "Find public-facing web pages only.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L82"
+    },
+    {
+      "id": "geo_checker_rationale_100",
+      "label": "Check a single web page for GEO elements.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L100"
+    },
+    {
+      "id": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "label": "lint_runner.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "lint_runner_detect_project_type",
+      "label": "detect_project_type()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "lint_runner_run_linter",
+      "label": "run_linter()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "lint_runner_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L116"
+    },
+    {
+      "id": "lint_runner_rationale_30",
+      "label": "Detect project type and available linters.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "lint_runner_rationale_73",
+      "label": "Run a single linter and return results.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "label": "type_coverage.py",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "type_coverage_check_typescript_coverage",
+      "label": "check_typescript_coverage()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "type_coverage_check_python_coverage",
+      "label": "check_python_coverage()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "type_coverage_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L128"
+    },
+    {
+      "id": "type_coverage_rationale_19",
+      "label": "Check TypeScript type coverage.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "type_coverage_rationale_75",
+      "label": "Check Python type hints coverage.",
+      "file_type": "rationale",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L75"
+    }
+  ],
+  "edges": [
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_colors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_header",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_step",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_success",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_warning",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_error",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_check_script_exists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_run_script",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_print_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L128",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_checklist_py",
+      "target": "checklist_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "checklist_check_script_exists",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "checklist_print_warning",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "checklist_print_step",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "checklist_print_success",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "checklist_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_print_summary",
+      "target": "checklist_print_header",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_print_summary",
+      "target": "checklist_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L156",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_print_summary",
+      "target": "checklist_print_success",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_main",
+      "target": "checklist_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_main",
+      "target": "checklist_print_header",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_main",
+      "target": "checklist_run_script",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_main",
+      "target": "checklist_print_summary",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L200",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_rationale_73",
+      "target": "checklist_check_script_exists",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_rationale_77",
+      "target": "checklist_run_script",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_rationale_129",
+      "target": "checklist_print_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_get_project_root",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_analyze_package_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_count_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_detect_features",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_print_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_session_manager_py",
+      "target": "session_manager_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_print_status",
+      "target": "session_manager_analyze_package_json",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_print_status",
+      "target": "session_manager_count_files",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_print_status",
+      "target": "session_manager_detect_features",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_main",
+      "target": "session_manager_get_project_root",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_main",
+      "target": "session_manager_print_status",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "session_manager_main",
+      "target": "session_manager_analyze_package_json",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/session_manager.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "time",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "signal",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_get_project_root",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_is_running",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_get_start_command",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_start_server",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_stop_server",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_status_server",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_auto_preview_py",
+      "target": "auto_preview_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_start_server",
+      "target": "auto_preview_is_running",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_start_server",
+      "target": "auto_preview_get_project_root",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_start_server",
+      "target": "auto_preview_get_start_command",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L62",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_stop_server",
+      "target": "auto_preview_is_running",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_status_server",
+      "target": "auto_preview_is_running",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_main",
+      "target": "auto_preview_start_server",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_main",
+      "target": "auto_preview_stop_server",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "auto_preview_main",
+      "target": "auto_preview_status_server",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/auto_preview.py",
+      "source_location": "L145",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_colors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_header",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_step",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_success",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_warning",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_error",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_run_script",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_print_final_report",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_scripts_verify_all_py",
+      "target": "verify_all_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L263",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_run_script",
+      "target": "verify_all_print_warning",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_run_script",
+      "target": "verify_all_print_step",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L156",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_run_script",
+      "target": "verify_all_print_success",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_run_script",
+      "target": "verify_all_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L179",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_print_final_report",
+      "target": "verify_all_print_header",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_print_final_report",
+      "target": "verify_all_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_print_final_report",
+      "target": "verify_all_print_success",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_main",
+      "target": "verify_all_print_error",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L283",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_main",
+      "target": "verify_all_print_header",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L286",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_main",
+      "target": "verify_all_run_script",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L311",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_main",
+      "target": "verify_all_print_final_report",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L318",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_rationale_151",
+      "target": "verify_all_run_script",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_rationale_203",
+      "target": "verify_all_print_final_report",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "mobile_audit_mobileauditor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_mobileauditor",
+      "target": "mobile_audit_mobileauditor_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_mobileauditor",
+      "target": "mobile_audit_mobileauditor_audit_file",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_mobileauditor",
+      "target": "mobile_audit_mobileauditor_audit_directory",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L613",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_mobileauditor",
+      "target": "mobile_audit_mobileauditor_get_report",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L621",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "mobile_audit_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L631",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_mobile_design_scripts_mobile_audit_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L669",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_mobileauditor_audit_directory",
+      "target": "mobile_audit_mobileauditor_audit_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L619",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_main",
+      "target": "mobile_audit_mobileauditor",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L639",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_main",
+      "target": "mobile_audit_mobileauditor_audit_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L641",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_main",
+      "target": "mobile_audit_mobileauditor_audit_directory",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L643",
+      "weight": 1.0
+    },
+    {
+      "source": "mobile_audit_main",
+      "target": "mobile_audit_mobileauditor_get_report",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/mobile-design/scripts/mobile_audit.py",
+      "source_location": "L645",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "seo_checker_is_page_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "seo_checker_find_pages",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "seo_checker_check_page",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_seo_fundamentals_scripts_seo_checker_py",
+      "target": "seo_checker_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_find_pages",
+      "target": "seo_checker_is_page_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_main",
+      "target": "seo_checker_find_pages",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_main",
+      "target": "seo_checker_check_page",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_rationale_49",
+      "target": "seo_checker_is_page_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_rationale_79",
+      "target": "seo_checker_find_pages",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "seo_checker_rationale_97",
+      "target": "seo_checker_check_page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/seo-fundamentals/scripts/seo_checker.py",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_scan_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_scan_secrets",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_scan_code_patterns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_scan_configuration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L296",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_run_full_scan",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L372",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_vulnerability_scanner_scripts_security_scan_py",
+      "target": "security_scan_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L421",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_main",
+      "target": "security_scan_run_full_scan",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L437",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_rationale_98",
+      "target": "security_scan_scan_dependencies",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_rationale_182",
+      "target": "security_scan_scan_secrets",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_rationale_237",
+      "target": "security_scan_scan_code_patterns",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L237",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_rationale_297",
+      "target": "security_scan_scan_configuration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L297",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_rationale_373",
+      "target": "security_scan_run_full_scan",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L373",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "schema_validator_find_schema_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "schema_validator_validate_prisma_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_database_design_scripts_schema_validator_py",
+      "target": "schema_validator_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_validator_main",
+      "target": "schema_validator_find_schema_files",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_validator_main",
+      "target": "schema_validator_validate_prisma_schema",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_validator_rationale_30",
+      "target": "schema_validator_find_schema_files",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "schema_validator_rationale_48",
+      "target": "schema_validator_validate_prisma_schema",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/database-design/scripts/schema_validator.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "i18n_checker_find_locale_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "i18n_checker_check_locale_completeness",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L70",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "i18n_checker_flatten_keys",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "i18n_checker_check_hardcoded_strings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_i18n_localization_scripts_i18n_checker_py",
+      "target": "i18n_checker_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_check_locale_completeness",
+      "target": "i18n_checker_flatten_keys",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_main",
+      "target": "i18n_checker_find_locale_files",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_main",
+      "target": "i18n_checker_check_locale_completeness",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_main",
+      "target": "i18n_checker_check_hardcoded_strings",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_rationale_54",
+      "target": "i18n_checker_find_locale_files",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_rationale_71",
+      "target": "i18n_checker_check_locale_completeness",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_rationale_121",
+      "target": "i18n_checker_flatten_keys",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "i18n_checker_rationale_132",
+      "target": "i18n_checker_check_hardcoded_strings",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/i18n-localization/scripts/i18n_checker.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "test_runner_detect_test_framework",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "test_runner_run_tests",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_testing_patterns_scripts_test_runner_py",
+      "target": "test_runner_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "test_runner_main",
+      "target": "test_runner_detect_test_framework",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "test_runner_main",
+      "target": "test_runner_run_tests",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "test_runner_rationale_28",
+      "target": "test_runner_detect_test_framework",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "test_runner_rationale_80",
+      "target": "test_runner_run_tests",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "tempfile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "lighthouse_audit_run_lighthouse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_performance_profiling_scripts_lighthouse_audit_py",
+      "target": "lighthouse_audit_get_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "lighthouse_audit_run_lighthouse",
+      "target": "lighthouse_audit_get_summary",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "lighthouse_audit_rationale_17",
+      "target": "lighthouse_audit_run_lighthouse",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "lighthouse_audit_rationale_61",
+      "target": "lighthouse_audit_get_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "tempfile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "playwright_sync_api",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "playwright_runner_run_basic_test",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_webapp_testing_scripts_playwright_runner_py",
+      "target": "playwright_runner_run_accessibility_check",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "playwright_runner_rationale_32",
+      "target": "playwright_runner_run_basic_test",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "playwright_runner_rationale_116",
+      "target": "playwright_runner_run_accessibility_check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/webapp-testing/scripts/playwright_runner.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "convert_rules_parse_frontmatter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "convert_rules_parse_rule_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "convert_rules_group_rules_by_section",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "convert_rules_generate_section_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L128",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_convert_rules_py",
+      "target": "convert_rules_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_parse_rule_file",
+      "target": "convert_rules_parse_frontmatter",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_group_rules_by_section",
+      "target": "convert_rules_parse_rule_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_main",
+      "target": "convert_rules_group_rules_by_section",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_main",
+      "target": "convert_rules_generate_section_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L214",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_rationale_66",
+      "target": "convert_rules_parse_frontmatter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_rationale_86",
+      "target": "convert_rules_parse_rule_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_rationale_109",
+      "target": "convert_rules_group_rules_by_section",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_rationale_129",
+      "target": "convert_rules_generate_section_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "convert_rules_rationale_186",
+      "target": "convert_rules_main",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/convert_rules.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "react_performance_checker_performancechecker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_waterfalls",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_barrel_imports",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_dynamic_imports",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_useeffect_fetching",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_missing_memoization",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_check_image_optimization",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_generate_report",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L217",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_nextjs_react_expert_scripts_react_performance_checker_py",
+      "target": "react_performance_checker_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_waterfalls",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_barrel_imports",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L225",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_dynamic_imports",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_useeffect_fetching",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_missing_memoization",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_check_image_optimization",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_performancechecker_run",
+      "target": "react_performance_checker_performancechecker_generate_report",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L231",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_main",
+      "target": "react_performance_checker_performancechecker",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_main",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_22",
+      "target": "react_performance_checker_performancechecker_check_waterfalls",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_47",
+      "target": "react_performance_checker_performancechecker_check_barrel_imports",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_73",
+      "target": "react_performance_checker_performancechecker_check_dynamic_imports",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_108",
+      "target": "react_performance_checker_performancechecker_check_useeffect_fetching",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_132",
+      "target": "react_performance_checker_performancechecker_check_missing_memoization",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_159",
+      "target": "react_performance_checker_performancechecker_check_image_optimization",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "react_performance_checker_rationale_182",
+      "target": "react_performance_checker_performancechecker_generate_report",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/nextjs-react-expert/scripts/react_performance_checker.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "ux_audit_uxauditor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_uxauditor",
+      "target": "ux_audit_uxauditor_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_uxauditor",
+      "target": "ux_audit_uxauditor_audit_file",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_uxauditor",
+      "target": "ux_audit_uxauditor_audit_directory",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L674",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_uxauditor",
+      "target": "ux_audit_uxauditor_get_report",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L682",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_ux_audit_py",
+      "target": "ux_audit_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L691",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_uxauditor_audit_directory",
+      "target": "ux_audit_uxauditor_audit_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L680",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_main",
+      "target": "ux_audit_uxauditor",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L697",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_main",
+      "target": "ux_audit_uxauditor_audit_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L698",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_main",
+      "target": "ux_audit_uxauditor_audit_directory",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L699",
+      "weight": 1.0
+    },
+    {
+      "source": "ux_audit_main",
+      "target": "ux_audit_uxauditor_get_report",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/ux_audit.py",
+      "source_location": "L701",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "accessibility_checker_find_html_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "accessibility_checker_check_accessibility",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_frontend_design_scripts_accessibility_checker_py",
+      "target": "accessibility_checker_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "accessibility_checker_main",
+      "target": "accessibility_checker_find_html_files",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "accessibility_checker_main",
+      "target": "accessibility_checker_check_accessibility",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "accessibility_checker_rationale_31",
+      "target": "accessibility_checker_find_html_files",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "accessibility_checker_rationale_45",
+      "target": "accessibility_checker_check_accessibility",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/frontend-design/scripts/accessibility_checker.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "api_validator_find_api_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "api_validator_check_openapi_spec",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "api_validator_check_api_code",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L94",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_api_patterns_scripts_api_validator_py",
+      "target": "api_validator_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_main",
+      "target": "api_validator_find_api_files",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_main",
+      "target": "api_validator_check_openapi_spec",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_main",
+      "target": "api_validator_check_api_code",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_rationale_19",
+      "target": "api_validator_find_api_files",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_rationale_38",
+      "target": "api_validator_check_openapi_spec",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "api_validator_rationale_95",
+      "target": "api_validator_check_api_code",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/api-patterns/scripts/api_validator.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "geo_checker_is_page_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "geo_checker_find_web_pages",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "geo_checker_check_page",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_geo_fundamentals_scripts_geo_checker_py",
+      "target": "geo_checker_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_find_web_pages",
+      "target": "geo_checker_is_page_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_main",
+      "target": "geo_checker_find_web_pages",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L233",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_main",
+      "target": "geo_checker_check_page",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_rationale_48",
+      "target": "geo_checker_is_page_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_rationale_82",
+      "target": "geo_checker_find_web_pages",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "geo_checker_rationale_100",
+      "target": "geo_checker_check_page",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/geo-fundamentals/scripts/geo_checker.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "platform",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "shutil",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "lint_runner_detect_project_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "lint_runner_run_linter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_lint_runner_py",
+      "target": "lint_runner_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "lint_runner_main",
+      "target": "lint_runner_detect_project_type",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "lint_runner_main",
+      "target": "lint_runner_run_linter",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "lint_runner_rationale_30",
+      "target": "lint_runner_detect_project_type",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "lint_runner_rationale_73",
+      "target": "lint_runner_run_linter",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "type_coverage_check_typescript_coverage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "type_coverage_check_python_coverage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "agent_skills_lint_and_validate_scripts_type_coverage_py",
+      "target": "type_coverage_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L128",
+      "weight": 1.0
+    },
+    {
+      "source": "type_coverage_main",
+      "target": "type_coverage_check_typescript_coverage",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "type_coverage_main",
+      "target": "type_coverage_check_python_coverage",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "type_coverage_rationale_19",
+      "target": "type_coverage_check_typescript_coverage",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "type_coverage_rationale_75",
+      "target": "type_coverage_check_python_coverage",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".agent/skills/lint-and-validate/scripts/type_coverage.py",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "checklist_run_script",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/scripts/checklist.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "verify_all_run_script",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/scripts/verify_all.py",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "security_scan_scan_dependencies",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/skills/vulnerability-scanner/scripts/security_scan.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "test_runner_run_tests",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/skills/testing-patterns/scripts/test_runner.py",
+      "source_location": "L91",
+      "weight": 1.0
+    },
+    {
+      "source": "lighthouse_audit_run_lighthouse",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/skills/performance-profiling/scripts/lighthouse_audit.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "lint_runner_run_linter",
+      "target": "react_performance_checker_performancechecker_run",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": ".agent/skills/lint-and-validate/scripts/lint_runner.py",
+      "source_location": "L91",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

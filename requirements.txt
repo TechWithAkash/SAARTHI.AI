@@ -1,0 +1,45 @@
+# Web framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Database
+asyncpg==0.29.0
+
+# Validation
+pydantic==2.7.4
+pydantic-settings==2.3.0
+python-dotenv==1.0.1
+
+# ML / AI (added in later phases)
+xgboost==2.0.3
+scikit-learn==1.4.2
+numpy==1.26.4
+pandas==2.2.2
+shap==0.45.1
+
+# Causal inference
+dowhy==0.11.1
+
+# Anomaly detection (sklearn IsolationForest; merlion was never used)
+
+# Memory
+mem0ai==0.1.29
+
+# LLM
+groq==0.11.0
+
+# Utilities
+uuid==1.30
+python-jose==3.3.0
+httpx==0.27.0
+
+# Wearables (BP-6)
+garminconnect==0.3.2
+
+# Document RAG — pdfplumber was imported but never declared,
+# so PDF upload failed on a clean install
+pdfplumber==0.11.4
+
+# ML runtime that was imported but undeclared
+torch==2.3.1
+joblib==1.4.2

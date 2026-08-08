@@ -1,0 +1,19 @@
+
+.venv
+.qdrant_data
+.env
+ngrok.log
+__pycache__/
+**/__pycache__/
+*.pyc
+.DS_Store
+node_modules/
+.next/
+dist/
+
+# Added by code-review-graph
+.code-review-graph/
+
+# Garmin Connect — auth tokens and cached health payloads (BP-6)
+.garmin_tokens
+.garmin_cache/

@@ -1,0 +1,170 @@
+
+=======================================================
+  DarpanAI Transformer Trainer — 12-Feature ICMR
+  Device   : CUDA
+=======================================================
+
+Loading ICMR dataset from /home/soc/.local/share/.cache-icmr/l40s_training_module/timeseries_health_data_icmr.csv...
+Building 3D tensors [users, days, features]...
+Assembling Sequences:   0%|          | 0/50000 [00:00<?, ?it/s]Assembling Sequences:   1%|          | 357/50000 [00:00<00:13, 3562.72it/s]Assembling Sequences:   1%|▏         | 747/50000 [00:00<00:13, 3759.76it/s]Assembling Sequences:   2%|▏         | 1138/50000 [00:00<00:12, 3825.67it/s]Assembling Sequences:   3%|▎         | 1529/50000 [00:00<00:12, 3857.69it/s]Assembling Sequences:   4%|▍         | 1922/50000 [00:00<00:12, 3882.98it/s]Assembling Sequences:   5%|▍         | 2314/50000 [00:00<00:12, 3894.34it/s]Assembling Sequences:   5%|▌         | 2704/50000 [00:00<00:14, 3296.78it/s]Assembling Sequences:   6%|▌         | 3095/50000 [00:00<00:13, 3468.77it/s]Assembling Sequences:   7%|▋         | 3485/50000 [00:00<00:12, 3591.29it/s]Assembling Sequences:   8%|▊         | 3875/50000 [00:01<00:12, 3680.69it/s]Assembling Sequences:   9%|▊         | 4263/50000 [00:01<00:12, 3736.49it/s]Assembling Sequences:   9%|▉         | 4651/50000 [00:01<00:12, 3776.38it/s]Assembling Sequences:  10%|█         | 5035/50000 [00:01<00:11, 3794.32it/s]Assembling Sequences:  11%|█         | 5418/50000 [00:01<00:11, 3804.58it/s]Assembling Sequences:  12%|█▏        | 5801/50000 [00:01<00:13, 3259.42it/s]Assembling Sequences:  12%|█▏        | 6185/50000 [00:01<00:12, 3412.39it/s]Assembling Sequences:  13%|█▎        | 6567/50000 [00:01<00:12, 3523.85it/s]Assembling Sequences:  14%|█▍        | 6950/50000 [00:01<00:11, 3608.63it/s]Assembling Sequences:  15%|█▍        | 7332/50000 [00:02<00:11, 3667.62it/s]Assembling Sequences:  15%|█▌        | 7714/50000 [00:02<00:11, 3710.17it/s]Assembling Sequences:  16%|█▌        | 8097/50000 [00:02<00:11, 3743.30it/s]Assembling Sequences:  17%|█▋        | 8480/50000 [00:02<00:11, 3766.17it/s]Assembling Sequences:  18%|█▊        | 8859/50000 [00:02<00:12, 3247.08it/s]Assembling Sequences:  18%|█▊        | 9242/50000 [00:02<00:11, 3402.65it/s]Assembling Sequences:  19%|█▉        | 9627/50000 [00:02<00:11, 3524.67it/s]Assembling Sequences:  20%|██        | 10011/50000 [00:02<00:11, 3613.24it/s]Assembling Sequences:  21%|██        | 10395/50000 [00:02<00:10, 3677.65it/s]Assembling Sequences:  22%|██▏       | 10778/50000 [00:02<00:10, 3719.32it/s]Assembling Sequences:  22%|██▏       | 11162/50000 [00:03<00:10, 3752.87it/s]Assembling Sequences:  23%|██▎       | 11540/50000 [00:03<00:11, 3216.59it/s]Assembling Sequences:  24%|██▍       | 11924/50000 [00:03<00:11, 3381.38it/s]Assembling Sequences:  25%|██▍       | 12308/50000 [00:03<00:10, 3506.19it/s]Assembling Sequences:  25%|██▌       | 12693/50000 [00:03<00:10, 3602.55it/s]Assembling Sequences:  26%|██▌       | 13078/50000 [00:03<00:10, 3670.90it/s]Assembling Sequences:  27%|██▋       | 13461/50000 [00:03<00:09, 3716.89it/s]Assembling Sequences:  28%|██▊       | 13845/50000 [00:03<00:09, 3752.83it/s]Assembling Sequences:  28%|██▊       | 14228/50000 [00:03<00:09, 3773.84it/s]Assembling Sequences:  29%|██▉       | 14608/50000 [00:04<00:10, 3220.53it/s]Assembling Sequences:  30%|██▉       | 14986/50000 [00:04<00:10, 3368.09it/s]Assembling Sequences:  31%|███       | 15371/50000 [00:04<00:09, 3500.24it/s]Assembling Sequences:  32%|███▏      | 15756/50000 [00:04<00:09, 3598.32it/s]Assembling Sequences:  32%|███▏      | 16143/50000 [00:04<00:09, 3673.99it/s]Assembling Sequences:  33%|███▎      | 16525/50000 [00:04<00:09, 3715.47it/s]Assembling Sequences:  34%|███▍      | 16907/50000 [00:04<00:08, 3744.11it/s]Assembling Sequences:  35%|███▍      | 17293/50000 [00:04<00:08, 3776.19it/s]Assembling Sequences:  35%|███▌      | 17678/50000 [00:04<00:08, 3795.63it/s]Assembling Sequences:  36%|███▌      | 18063/50000 [00:04<00:08, 3810.61it/s]Assembling Sequences:  37%|███▋      | 18448/50000 [00:05<00:08, 3820.44it/s]Assembling Sequences:  38%|███▊      | 18831/50000 [00:05<00:09, 3215.96it/s]Assembling Sequences:  38%|███▊      | 19214/50000 [00:05<00:09, 3375.95it/s]Assembling Sequences:  39%|███▉      | 19586/50000 [00:05<00:08, 3468.36it/s]Assembling Sequences:  40%|███▉      | 19957/50000 [00:05<00:08, 3534.43it/s]Assembling Sequences:  41%|████      | 20329/50000 [00:05<00:08, 3584.91it/s]Assembling Sequences:  41%|████▏     | 20699/50000 [00:05<00:08, 3616.06it/s]Assembling Sequences:  42%|████▏     | 21066/50000 [00:05<00:07, 3631.31it/s]Assembling Sequences:  43%|████▎     | 21433/50000 [00:05<00:07, 3633.30it/s]Assembling Sequences:  44%|████▎     | 21799/50000 [00:06<00:07, 3634.90it/s]Assembling Sequences:  44%|████▍     | 22164/50000 [00:06<00:09, 3089.26it/s]Assembling Sequences:  45%|████▌     | 22543/50000 [00:06<00:08, 3273.21it/s]Assembling Sequences:  46%|████▌     | 22918/50000 [00:06<00:07, 3403.00it/s]Assembling Sequences:  47%|████▋     | 23290/50000 [00:06<00:07, 3490.92it/s]Assembling Sequences:  47%|████▋     | 23671/50000 [00:06<00:07, 3580.51it/s]Assembling Sequences:  48%|████▊     | 24046/50000 [00:06<00:07, 3629.51it/s]Assembling Sequences:  49%|████▉     | 24427/50000 [00:06<00:06, 3681.41it/s]Assembling Sequences:  50%|████▉     | 24807/50000 [00:06<00:06, 3715.85it/s]Assembling Sequences:  50%|█████     | 25181/50000 [00:07<00:07, 3157.29it/s]Assembling Sequences:  51%|█████     | 25566/50000 [00:07<00:07, 3338.71it/s]Assembling Sequences:  52%|█████▏    | 25951/50000 [00:07<00:06, 3478.36it/s]Assembling Sequences:  53%|█████▎    | 26336/50000 [00:07<00:06, 3582.71it/s]Assembling Sequences:  53%|█████▎    | 26721/50000 [00:07<00:06, 3657.44it/s]Assembling Sequences:  54%|█████▍    | 27106/50000 [00:07<00:06, 3712.75it/s]Assembling Sequences:  55%|█████▍    | 27492/50000 [00:07<00:05, 3754.77it/s]Assembling Sequences:  56%|█████▌    | 27874/50000 [00:07<00:05, 3772.78it/s]Assembling Sequences:  57%|█████▋    | 28258/50000 [00:07<00:05, 3790.46it/s]Assembling Sequences:  57%|█████▋    | 28639/50000 [00:08<00:06, 3278.71it/s]Assembling Sequences:  58%|█████▊    | 28991/50000 [00:08<00:06, 3343.08it/s]Assembling Sequences:  59%|█████▉    | 29375/50000 [00:08<00:05, 3479.74it/s]Assembling Sequences:  60%|█████▉    | 29753/50000 [00:08<00:05, 3564.50it/s]Assembling Sequences:  60%|██████    | 30139/50000 [00:08<00:05, 3647.23it/s]Assembling Sequences:  61%|██████    | 30523/50000 [00:08<00:05, 3701.55it/s]Assembling Sequences:  62%|██████▏   | 30908/50000 [00:08<00:05, 3743.96it/s]Assembling Sequences:  63%|██████▎   | 31285/50000 [00:08<00:05, 3202.52it/s]Assembling Sequences:  63%|██████▎   | 31670/50000 [00:08<00:05, 3372.70it/s]Assembling Sequences:  64%|██████▍   | 32054/50000 [00:08<00:05, 3499.93it/s]Assembling Sequences:  65%|██████▍   | 32432/50000 [00:09<00:04, 3576.91it/s]Assembling Sequences:  66%|██████▌   | 32811/50000 [00:09<00:04, 3637.70it/s]Assembling Sequences:  66%|██████▋   | 33198/50000 [00:09<00:04, 3703.18it/s]Assembling Sequences:  67%|██████▋   | 33583/50000 [00:09<00:04, 3745.62it/s]Assembling Sequences:  68%|██████▊   | 33969/50000 [00:09<00:04, 3778.10it/s]Assembling Sequences:  69%|██████▊   | 34349/50000 [00:09<00:04, 3213.68it/s]Assembling Sequences:  69%|██████▉   | 34730/50000 [00:09<00:04, 3371.31it/s]Assembling Sequences:  70%|███████   | 35116/50000 [00:09<00:04, 3503.00it/s]Assembling Sequences:  71%|███████   | 35501/50000 [00:09<00:04, 3599.93it/s]Assembling Sequences:  72%|███████▏  | 35879/50000 [00:10<00:03, 3650.54it/s]Assembling Sequences:  73%|███████▎  | 36257/50000 [00:10<00:03, 3686.85it/s]Assembling Sequences:  73%|███████▎  | 36643/50000 [00:10<00:03, 3735.78it/s]Assembling Sequences:  74%|███████▍  | 37020/50000 [00:10<00:04, 3227.20it/s]Assembling Sequences:  75%|███████▍  | 37406/50000 [00:10<00:03, 3394.55it/s]Assembling Sequences:  76%|███████▌  | 37792/50000 [00:10<00:03, 3522.57it/s]Assembling Sequences:  76%|███████▋  | 38175/50000 [00:10<00:03, 3609.09it/s]Assembling Sequences:  77%|███████▋  | 38560/50000 [00:10<00:03, 3677.41it/s]Assembling Sequences:  78%|███████▊  | 38944/50000 [00:10<00:02, 3723.85it/s]Assembling Sequences:  79%|███████▊  | 39329/50000 [00:11<00:02, 3759.99it/s]Assembling Sequences:  79%|███████▉  | 39714/50000 [00:11<00:02, 3784.99it/s]Assembling Sequences:  80%|████████  | 40095/50000 [00:11<00:03, 3227.77it/s]Assembling Sequences:  81%|████████  | 40482/50000 [00:11<00:02, 3397.73it/s]Assembling Sequences:  82%|████████▏ | 40869/50000 [00:11<00:02, 3525.43it/s]Assembling Sequences:  83%|████████▎ | 41255/50000 [00:11<00:02, 3617.39it/s]Assembling Sequences:  83%|████████▎ | 41641/50000 [00:11<00:02, 3685.58it/s]Assembling Sequences:  84%|████████▍ | 42025/50000 [00:11<00:02, 3728.35it/s]Assembling Sequences:  85%|████████▍ | 42411/50000 [00:11<00:02, 3764.85it/s]Assembling Sequences:  86%|████████▌ | 42795/50000 [00:11<00:01, 3785.99it/s]Assembling Sequences:  86%|████████▋ | 43176/50000 [00:12<00:02, 3229.43it/s]Assembling Sequences:  87%|████████▋ | 43563/50000 [00:12<00:01, 3397.68it/s]Assembling Sequences:  88%|████████▊ | 43948/50000 [00:12<00:01, 3521.45it/s]Assembling Sequences:  89%|████████▊ | 44337/50000 [00:12<00:01, 3623.73it/s]Assembling Sequences:  89%|████████▉ | 44721/50000 [00:12<00:01, 3684.10it/s]Assembling Sequences:  90%|█████████ | 45106/50000 [00:12<00:01, 3731.88it/s]Assembling Sequences:  91%|█████████ | 45491/50000 [00:12<00:01, 3765.93it/s]Assembling Sequences:  92%|█████████▏| 45871/50000 [00:12<00:01, 3213.75it/s]Assembling Sequences:  93%|█████████▎| 46255/50000 [00:12<00:01, 3378.51it/s]Assembling Sequences:  93%|█████████▎| 46639/50000 [00:13<00:00, 3502.87it/s]Assembling Sequences:  94%|█████████▍| 47022/50000 [00:13<00:00, 3594.36it/s]Assembling Sequences:  95%|█████████▍| 47407/50000 [00:13<00:00, 3667.40it/s]Assembling Sequences:  96%|█████████▌| 47791/50000 [00:13<00:00, 3716.57it/s]Assembling Sequences:  96%|█████████▋| 48177/50000 [00:13<00:00, 3757.32it/s]Assembling Sequences:  97%|█████████▋| 48556/50000 [00:13<00:00, 3201.12it/s]Assembling Sequences:  98%|█████████▊| 48942/50000 [00:13<00:00, 3374.05it/s]Assembling Sequences:  99%|█████████▊| 49327/50000 [00:13<00:00, 3502.61it/s]Assembling Sequences:  99%|█████████▉| 49714/50000 [00:13<00:00, 3605.03it/s]Assembling Sequences: 100%|██████████| 50000/50000 [00:14<00:00, 3566.64it/s]
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:121: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=n_layers)
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:229: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler() # Mixed precision
+Tensor shape: X=torch.Size([50000, 30, 12])  y=torch.Size([50000, 3])
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 01/30  Loss=190.5509  Val_R²=0.3426  Val_MAE=17.53%  LR=1.50e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 02/30  Loss=53.1502  Val_R²=0.8848  Val_MAE=7.22%  LR=3.00e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 03/30  Loss=23.6355  Val_R²=0.9253  Val_MAE=5.63%  LR=3.00e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 04/30  Loss=20.0733  Val_R²=0.9351  Val_MAE=5.41%  LR=2.99e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 05/30  Loss=17.7935  Val_R²=0.9477  Val_MAE=4.66%  LR=2.96e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 06/30  Loss=16.0780  Val_R²=0.9411  Val_MAE=5.00%  LR=2.92e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 07/30  Loss=15.1292  Val_R²=0.9594  Val_MAE=4.14%  LR=2.85e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 08/30  Loss=13.6652  Val_R²=0.9713  Val_MAE=3.38%  LR=2.77e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 09/30  Loss=12.8044  Val_R²=0.9714  Val_MAE=3.46%  LR=2.67e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 10/30  Loss=11.9080  Val_R²=0.9772  Val_MAE=3.05%  LR=2.56e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 11/30  Loss=11.0819  Val_R²=0.9789  Val_MAE=2.95%  LR=2.44e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 12/30  Loss=10.5922  Val_R²=0.9747  Val_MAE=3.41%  LR=2.30e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 13/30  Loss=10.2842  Val_R²=0.9784  Val_MAE=3.12%  LR=2.15e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 14/30  Loss=9.9720  Val_R²=0.9835  Val_MAE=2.51%  LR=2.00e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 15/30  Loss=9.6471  Val_R²=0.9771  Val_MAE=2.98%  LR=1.83e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 16/30  Loss=9.4879  Val_R²=0.9874  Val_MAE=2.26%  LR=1.67e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 17/30  Loss=9.1423  Val_R²=0.9857  Val_MAE=2.42%  LR=1.50e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 18/30  Loss=8.8725  Val_R²=0.9859  Val_MAE=2.43%  LR=1.33e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 19/30  Loss=8.8254  Val_R²=0.9888  Val_MAE=2.08%  LR=1.17e-04  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 20/30  Loss=8.7023  Val_R²=0.9884  Val_MAE=2.14%  LR=1.00e-04  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 21/30  Loss=8.5508  Val_R²=0.9872  Val_MAE=2.33%  LR=8.49e-05  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 22/30  Loss=8.3448  Val_R²=0.9893  Val_MAE=2.06%  LR=7.02e-05  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 23/30  Loss=8.2375  Val_R²=0.9893  Val_MAE=2.15%  LR=5.65e-05  [VRAM=0.62GB] 
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 24/30  Loss=8.1335  Val_R²=0.9898  Val_MAE=1.98%  LR=4.39e-05  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 25/30  Loss=7.9721  Val_R²=0.9908  Val_MAE=1.89%  LR=3.27e-05  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 26/30  Loss=7.9527  Val_R²=0.9910  Val_MAE=1.86%  LR=2.30e-05  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 27/30  Loss=7.8903  Val_R²=0.9911  Val_MAE=1.87%  LR=1.49e-05  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 28/30  Loss=7.9128  Val_R²=0.9911  Val_MAE=1.87%  LR=8.42e-06  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 29/30  Loss=7.8822  Val_R²=0.9913  Val_MAE=1.84%  LR=3.76e-06  [VRAM=0.62GB]  ◀ best
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:240: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast():
+/home/soc/.local/share/.cache-icmr/l40s_training_module/train_l40s_sequence.py:255: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.no_grad(), torch.cuda.amp.autocast():
+Epoch 30/30  Loss=7.7943  Val_R²=0.9914  Val_MAE=1.83%  LR=9.43e-07  [VRAM=0.62GB]  ◀ best
+
+=======================================================
+  Training Complete! Best Val R²: 0.9914
+  Model ready at: darpan_sequence_model_icmr.pth
+=======================================================
+

@@ -1,0 +1,150 @@
+{
+  "communities": {
+    "0": [
+      "agents_mcp_tools_code_review_graph",
+      "claude_mcp_tools_code_review_graph",
+      "concept_architecture_exploration",
+      "gemini_mcp_tools_code_review_graph",
+      "tool_get_architecture_overview",
+      "tool_list_communities",
+      "tool_semantic_search_nodes"
+    ],
+    "1": [
+      "concept_graph_auto_update",
+      "concept_knowledge_graph",
+      "rationale_graph_first_workflow",
+      "tool_refactor_tool"
+    ],
+    "2": [
+      "concept_code_review_workflow",
+      "tool_detect_changes",
+      "tool_get_review_context",
+      "tool_query_graph"
+    ],
+    "3": [
+      "concept_impact_analysis",
+      "tool_get_affected_flows",
+      "tool_get_impact_radius"
+    ]
+  },
+  "cohesion": {
+    "0": 0.43,
+    "1": 0.5,
+    "2": 0.5,
+    "3": 0.67
+  },
+  "gods": [
+    {
+      "id": "claude_mcp_tools_code_review_graph",
+      "label": "MCP Tools: code-review-graph (CLAUDE.md)",
+      "degree": 12
+    },
+    {
+      "id": "concept_knowledge_graph",
+      "label": "Knowledge Graph (code-review-graph)",
+      "degree": 4
+    },
+    {
+      "id": "concept_code_review_workflow",
+      "label": "Code Review Workflow",
+      "degree": 4
+    },
+    {
+      "id": "concept_impact_analysis",
+      "label": "Impact Analysis / Blast Radius",
+      "degree": 3
+    },
+    {
+      "id": "concept_architecture_exploration",
+      "label": "Architecture Exploration",
+      "degree": 3
+    },
+    {
+      "id": "gemini_mcp_tools_code_review_graph",
+      "label": "MCP Tools: code-review-graph (GEMINI.md)",
+      "degree": 2
+    },
+    {
+      "id": "agents_mcp_tools_code_review_graph",
+      "label": "MCP Tools: code-review-graph (AGENTS.md)",
+      "degree": 2
+    },
+    {
+      "id": "tool_detect_changes",
+      "label": "detect_changes",
+      "degree": 2
+    },
+    {
+      "id": "tool_get_review_context",
+      "label": "get_review_context",
+      "degree": 2
+    },
+    {
+      "id": "tool_get_impact_radius",
+      "label": "get_impact_radius",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "MCP Tools: code-review-graph (GEMINI.md)",
+      "target": "MCP Tools: code-review-graph (CLAUDE.md)",
+      "source_files": [
+        "GEMINI.md",
+        "CLAUDE.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "semantically_similar_to",
+      "why": "connects across different repos/directories; semantically similar concepts with no structural link; peripheral node `MCP Tools: code-review-graph (GEMINI.md)` unexpectedly reaches hub `MCP Tools: code-review-graph (CLAUDE.md)`"
+    },
+    {
+      "source": "MCP Tools: code-review-graph (AGENTS.md)",
+      "target": "MCP Tools: code-review-graph (CLAUDE.md)",
+      "source_files": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "semantically_similar_to",
+      "why": "connects across different repos/directories; semantically similar concepts with no structural link; peripheral node `MCP Tools: code-review-graph (AGENTS.md)` unexpectedly reaches hub `MCP Tools: code-review-graph (CLAUDE.md)`"
+    },
+    {
+      "source": "MCP Tools: code-review-graph (GEMINI.md)",
+      "target": "MCP Tools: code-review-graph (AGENTS.md)",
+      "source_files": [
+        "GEMINI.md",
+        "AGENTS.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "semantically_similar_to",
+      "why": "connects across different repos/directories; semantically similar concepts with no structural link"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `MCP Tools: code-review-graph (CLAUDE.md)` connect `Community 0` to `Community 1`, `Community 2`, `Community 3`?",
+      "why": "High betweenness centrality (0.820) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Knowledge Graph (code-review-graph)` connect `Community 1` to `Community 0`?",
+      "why": "High betweenness centrality (0.228) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `get_impact_radius` connect `Community 3` to `Community 0`?",
+      "why": "High betweenness centrality (0.040) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 2 inferred relationships involving `Code Review Workflow` (e.g. with `query_graph` and `Impact Analysis / Blast Radius`) actually correct?",
+      "why": "`Code Review Workflow` has 2 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Rationale: Use graph tools before Grep/Glob/Read \u2014 faster, cheaper, provides structural context`, `Graph Auto-update on File Changes (via hooks)` to the rest of the system?",
+      "why": "2 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}
