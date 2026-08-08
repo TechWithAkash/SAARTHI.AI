@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 import DashboardScreen from './screens/DashboardScreen';
 import SyncScreen from './screens/SyncScreen';
@@ -11,27 +12,44 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        id={undefined}
         screenOptions={{
-          tabBarActiveTintColor: '#16A34A',
-          tabBarInactiveTintColor: '#A1A1AA',
+          tabBarActiveTintColor: '#2563EB',
+          tabBarInactiveTintColor: '#9CA3AF',
           headerShown: false,
+          tabBarShowLabel: true,
+          tabBarLabelStyle: { fontSize: 11, fontWeight: '700', marginTop: -2 },
           tabBarStyle: {
             backgroundColor: '#ffffff',
-            borderTopColor: '#f4f4f5',
+            borderTopColor: '#F1F5F9',
+            borderTopWidth: 1,
             elevation: 0,
             shadowOpacity: 0,
+            height: 62,
+            paddingTop: 8,
+            paddingBottom: 8,
           },
         }}
       >
-        <Tab.Screen 
-          name="Dashboard" 
-          component={DashboardScreen} 
-          options={{ title: 'SAARTHI.AI Insights' }} 
+        <Tab.Screen
+          name="Dashboard"
+          component={DashboardScreen}
+          options={{
+            title: 'Insights',
+            tabBarIcon: ({ color, size, focused }) => (
+              <Ionicons name={focused ? 'pulse' : 'pulse-outline'} size={size} color={color} />
+            ),
+          }}
         />
-        <Tab.Screen 
-          name="Sync" 
-          component={SyncScreen} 
-          options={{ title: 'Apple Health Sync' }} 
+        <Tab.Screen
+          name="Sync"
+          component={SyncScreen}
+          options={{
+            title: 'Garmin Sync',
+            tabBarIcon: ({ color, size, focused }) => (
+              <Ionicons name={focused ? 'watch' : 'watch-outline'} size={size} color={color} />
+            ),
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>

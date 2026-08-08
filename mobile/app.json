@@ -14,15 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.saarthiai.aura",
-      "infoPlist": {
-        "NSHealthShareUsageDescription": "Aura requires access to Health data to analyze your daily habits, sleep, and heart anomalies.",
-        "NSHealthUpdateUsageDescription": "Aura requires permission to update Health app data.",
-        "UIBackgroundModes": [
-          "fetch",
-          "processing"
-        ]
-      }
+      "bundleIdentifier": "com.saarthiai.aura"
     },
     "android": {
       "adaptiveIcon": {
@@ -43,7 +35,8 @@
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }
