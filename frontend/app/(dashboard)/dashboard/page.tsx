@@ -193,7 +193,7 @@ export default function Dashboard() {
     setGarminSyncing(true);
     setGarminError(null);
     try {
-      await api.syncGarmin(DEFAULT_USER, 14);
+      await api.syncGarmin(DEFAULT_USER, 30);
       fetchGarminStatus();
       fetchHistory();
       const latest = await api.getLatestHealth(DEFAULT_USER);
@@ -387,6 +387,10 @@ export default function Dashboard() {
     const riskBg = result
       ? result.score < 30 ? '#ecfdf5' : result.score < 60 ? '#fffbeb' : '#fef2f2'
       : '#f8fafc';
+    // Colors above stay driven by the real risk score (severity is still
+    // severity) — only the headline NUMBER shown is inverted, matching the
+    // Health Equilibrium framing used everywhere else in the app now.
+    const equilibriumScore = result ? Math.round(100 - result.score) : null;
 
     const vitalsRows = [
       { label: 'Heart Rate', value: `${form.heart_rate}`, unit: 'bpm', ref: '60–100', status: form.heart_rate >= 60 && form.heart_rate <= 100 ? 'Normal' : 'Review' },
@@ -448,11 +452,11 @@ export default function Dashboard() {
     ${result ? `
     <div class="risk-card">
       <div>
-        <div style="font-size:10px;font-weight:700;color:${riskColor};text-transform:uppercase;margin-bottom:4px;">Risk Assessment Score</div>
-        <div class="risk-score-num">${result.score.toFixed(0)} <span style="font-size:16px;color:#64748b;">/ 100</span></div>
+        <div style="font-size:10px;font-weight:700;color:${riskColor};text-transform:uppercase;margin-bottom:4px;">Health Equilibrium Score</div>
+        <div class="risk-score-num">${equilibriumScore} <span style="font-size:16px;color:#64748b;">/ 100</span></div>
       </div>
       <div style="text-align:right">
-        <div style="font-size:20px;font-weight:700;color:${riskColor}">${result.category} Risk Category</div>
+        <div style="font-size:20px;font-weight:700;color:${riskColor}">${result.category} Category</div>
         <div style="font-size:12px;color:#475569;margin-top:4px">Key Factors: ${result.topFactors.map(f => f.replace(/_/g, ' ')).join(', ')}</div>
       </div>
     </div>` : ''}
@@ -517,7 +521,7 @@ export default function Dashboard() {
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Good Evening, {userName || 'Soham'} 👋</h1>
-          <p className="text-xs sm:text-sm text-blue-100/80 font-medium mt-1">Patient Health Overview · 14-Day Physiological Baseline Analysis</p>
+          <p className="text-xs sm:text-sm text-blue-100/80 font-medium mt-1">Patient Health Overview · 30-Day Physiological Baseline Analysis</p>
           {garminError && (
             <p className="text-xs text-rose-300 font-medium mt-2 max-w-md">{garminError}</p>
           )}
@@ -569,14 +573,32 @@ export default function Dashboard() {
       {/* ── 2. OVERALL HEALTH STATUS & ALERTS ── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
 
-        {/* Card 1 — Overall Wellness Index with Up & Down Trend Sparkline */}
+        {/* Card 1 — Health Equilibrium: 100 - risk_score, same computation as the
+            risk score, shown inverted as a positively-framed wellness figure.
+            Deliberately different framing from mobile's direct risk display
+            (14 here shows as ~86) — a product decision, not a data bug; the
+            underlying number is identical. */}
         {(() => {
-          const prakritiScore = liveRisk ? Math.round(100 - liveRisk.risk_score) : 82;
-          const pctFraction = prakritiScore / 100;
+          const riskScore = liveRisk ? Math.round(liveRisk.risk_score) : null;
+          const equilibriumScore = riskScore != null ? 100 - riskScore : null;
+          const category = liveRisk?.risk_category ?? null;
+          const catStyle: Record<string, { text: string; bg: string; dot: string; ring: string }> = {
+            Low:      { text: "text-emerald-700", bg: "bg-emerald-50 border-emerald-200", dot: "bg-emerald-500", ring: "#10B981" },
+            Moderate: { text: "text-amber-700",   bg: "bg-amber-50 border-amber-200",     dot: "bg-amber-500",   ring: "#D97706" },
+            High:     { text: "text-orange-700",  bg: "bg-orange-50 border-orange-200",   dot: "bg-orange-500",  ring: "#EA580C" },
+            Critical: { text: "text-rose-700",    bg: "bg-rose-50 border-rose-200",       dot: "bg-rose-500",    ring: "#DC2626" },
+          };
+          const style = catStyle[category ?? "Low"] ?? catStyle.Low;
+          const pctFraction = (equilibriumScore ?? 0) / 100;
+
+          // Wellness trend, not risk trend — inverted alongside the headline
+          // number so the arrow direction stays meaningful (up = improving).
           const realHistorySparkline = sparklineFromHistory(history, (r) => 100 - r.risk_score);
-          const sparklineData = realHistorySparkline.length >= 3 
-            ? realHistorySparkline 
-            : [{ val: 78 }, { val: 80 }, { val: 76 }, { val: 82 }, { val: 84 }, { val: 81 }, { val: 85 }];
+          const hasRealTrend = realHistorySparkline.length >= 3;
+          const sparklineData = hasRealTrend ? realHistorySparkline : [];
+          const trendDelta = hasRealTrend
+            ? Math.round((realHistorySparkline[realHistorySparkline.length - 1].val - realHistorySparkline[0].val) * 10) / 10
+            : null;
 
           return (
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between h-full min-h-[240px] transition-all hover:border-slate-300 relative overflow-hidden">
@@ -585,54 +607,60 @@ export default function Dashboard() {
                 <div className="flex justify-between items-start gap-4">
                   <div>
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-extrabold text-slate-900 tracking-tight">{prakritiScore}</span>
+                      <span className="text-3xl font-extrabold text-slate-900 tracking-tight">{equilibriumScore ?? "—"}</span>
                       <span className="text-sm font-semibold text-slate-400">/ 100</span>
                     </div>
                     <div className="mt-2">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        Optimal Balance
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold border ${style.bg} ${style.text}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
+                        {category ?? "No data"}
                       </span>
                     </div>
                   </div>
                   <div className="relative w-14 h-14 shrink-0">
                     <svg className="w-14 h-14 -rotate-90" viewBox="0 0 56 56">
                       <circle cx="28" cy="28" r="22" stroke="#f1f5f9" strokeWidth="5" fill="none" />
-                      <circle cx="28" cy="28" r="22" stroke="#10B981" strokeWidth="5" fill="none"
+                      <circle cx="28" cy="28" r="22" stroke={style.ring} strokeWidth="5" fill="none"
                         strokeDasharray={`${2 * Math.PI * 22 * pctFraction} ${2 * Math.PI * 22}`}
                         strokeLinecap="round" className="transition-all duration-700" />
                     </svg>
-                    <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-700">{prakritiScore}%</span>
+                    <span className="absolute inset-0 flex items-center justify-center text-xs font-bold" style={{ color: style.ring }}>{equilibriumScore ?? "—"}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Up-and-Down Trend Sparkline Line Graph */}
+              {/* Trend — only shown when there's enough real history to compute one */}
               <div className="my-2">
                 <div className="flex justify-between items-center text-[11px] text-slate-400 font-medium mb-1">
-                  <span>30-Day Trend Curve</span>
-                  <span className="text-emerald-600 font-semibold flex items-center gap-0.5">
-                    <ArrowUpRight className="w-3 h-3" /> +2.4 pts
-                  </span>
+                  <span>Equilibrium Trend</span>
+                  {trendDelta !== null && (
+                    <span className={`font-semibold flex items-center gap-0.5 ${trendDelta >= 0 ? "text-emerald-600" : "text-rose-600"}`}>
+                      <ArrowUpRight className={`w-3 h-3 ${trendDelta < 0 ? "rotate-90" : ""}`} /> {trendDelta > 0 ? "+" : ""}{trendDelta} pts
+                    </span>
+                  )}
                 </div>
                 <div className="h-12 w-full">
-                  <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
-                    <AreaChart data={sparklineData}>
-                      <defs>
-                        <linearGradient id="colorEqSpark" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#10B981" stopOpacity={0.25} />
-                          <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <Area type="monotone" dataKey="val" stroke="#10B981" strokeWidth={2} fill="url(#colorEqSpark)" />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                  {hasRealTrend ? (
+                    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+                      <AreaChart data={sparklineData}>
+                        <defs>
+                          <linearGradient id="colorEqSpark" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor={style.ring} stopOpacity={0.25} />
+                            <stop offset="95%" stopColor={style.ring} stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <Area type="monotone" dataKey="val" stroke={style.ring} strokeWidth={2} fill="url(#colorEqSpark)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <div className="h-full flex items-center text-[11px] text-slate-300">Not enough history yet for a trend</div>
+                  )}
                 </div>
               </div>
 
               <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
                 <span>Physiological Trajectory</span>
-                <span className="text-slate-400 text-[11px]">Vitals Nominal</span>
+                <span className="text-slate-400 text-[11px]">{liveRisk?.model_saturated ? "Low confidence" : "Vitals Nominal"}</span>
               </div>
             </div>
           );

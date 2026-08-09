@@ -192,10 +192,13 @@ export interface GarminSyncResult {
 // requested — that's several sequential external HTTP calls, not a local DB
 // read, so it legitimately takes much longer than the app's other endpoints.
 // The shared 15s apiClient timeout is fine for those but too tight here; give
-// this one call more room before giving up.
-const GARMIN_SYNC_TIMEOUT_MS = 60000;
+// this one call more room before giving up. Bumped alongside the 14->30 day
+// default below — steps/body-battery are 2 bulk calls regardless of range,
+// but sleep/HRV/stress are one call *per day*, so 30 days is meaningfully
+// more real network time than 14 was.
+const GARMIN_SYNC_TIMEOUT_MS = 90000;
 
-export const syncGarmin = async (userId: string, days = 14): Promise<GarminSyncResult> => {
+export const syncGarmin = async (userId: string, days = 30): Promise<GarminSyncResult> => {
   const response = await apiClient.post(
     '/garmin/sync',
     { user_id: userId, days },

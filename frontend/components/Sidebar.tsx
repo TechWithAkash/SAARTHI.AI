@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, Radio, Compass, BellRing, Settings2, LogOut, MessageSquare, Swords } from "lucide-react";
+import { Activity, Radio, Compass, BellRing, Settings2, LogOut, MessageSquare, Swords, FlaskConical } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/dashboard",  label: "Health Dashboard",     icon: Activity },
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/alerts",     label: "Alerts & Notifications", icon: BellRing },
   { href: "/arena",      label: "AI Model Benchmarks",  icon: Swords, highlight: true },
   { href: "/chat",       label: "AI Health Assistant",  icon: MessageSquare, highlight: true },
+  { href: "/validation", label: "Model Validation",     icon: FlaskConical, highlight: true },
   { href: "/settings",   label: "Preferences & Profile", icon: Settings2 },
 ];
 

@@ -52,10 +52,10 @@ export default function SyncScreen() {
     setSyncing(true);
     setLogsOpen(true);
     addLog('Requesting sync from backend…');
-    addLog('Pulling real data from Garmin — this can take up to a minute.');
+    addLog('Pulling 30 days of real data from Garmin — this can take a minute or two.');
 
     try {
-      const result = await syncGarmin(DEFAULT_USER, 14);
+      const result = await syncGarmin(DEFAULT_USER, 30);
       addLog(`Source: ${result.source} | Status: ${result.status}`);
       addLog(`Ingested ${result.days_ingested} day(s): ${result.date_range.start} → ${result.date_range.end}`);
       addLog('SUCCESS — dashboard will reflect this on next load.');

@@ -291,6 +291,6 @@ export const api = {
     post<UserProfile>("/profile", data),
   getGarminStatus: (userId: string) =>
     get<GarminStatus>(`/garmin/status?user_id=${encodeURIComponent(userId)}`),
-  syncGarmin: (userId: string, days: number = 14) =>
+  syncGarmin: (userId: string, days: number = 30) =>
     post<GarminSyncResult>("/garmin/sync", { user_id: userId, days }),
 };

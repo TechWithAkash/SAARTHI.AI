@@ -19,7 +19,10 @@ router = APIRouter()
 
 class GarminSyncRequest(BaseModel):
     user_id: str
-    days: int = Field(default=14, ge=1, le=90, description="Days of history to backfill")
+    # Matches risk_service.py's actual analysis window (LIMIT 30, a real
+    # 30-day trailing sequence) — defaulting to 14 here meant a sync only
+    # ever filled half the model's real window with real data.
+    days: int = Field(default=30, ge=1, le=90, description="Days of history to backfill")
 
 
 @router.get("/garmin/status")

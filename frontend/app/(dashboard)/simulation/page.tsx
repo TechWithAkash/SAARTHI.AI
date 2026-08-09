@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { api, type SimulationResponse, type Recommendation, type AgentMeta } from "@/lib/api";
+import { api, type SimulationResponse, type Recommendation, type AgentMeta, type WhatIfResponse } from "@/lib/api";
 import SimulationChart from "@/components/SimulationChart";
 import AgentTrace from "@/components/AgentTrace";
 import WhatIfSimulator from "@/components/WhatIfSimulator";
@@ -13,6 +13,7 @@ export default function SimulationPage() {
   const [agent, setAgent] = useState<AgentMeta | null>(null);
   const [agentDone, setAgentDone] = useState(false);
   const [userId, setUserId] = useState("");
+  const [whatIfResult, setWhatIfResult] = useState<WhatIfResponse | null>(null);
 
   useEffect(() => {
     const uid = sessionStorage.getItem("saarthi_user_id") ?? sessionStorage.getItem("darpan_user_id") ?? "user_demo_001";
@@ -39,6 +40,21 @@ export default function SimulationPage() {
 
   if (simLoading) return <LoadingState />;
   if (!sim) return <EmptyState />;
+
+  // The what-if endpoint returns one number: your risk if this state is
+  // sustained for 30 days. It doesn't return a full 120-day curve, so this
+  // interpolates linearly from today's real baseline (day 0) to that 30-day
+  // projection, then holds flat after day 30 — the same shape the existing
+  // Improved/Optimal lines already use (decline, then plateau). No new
+  // backend call: reuses the same postWhatIf result already shown below.
+  const whatIfLine = whatIfResult
+    ? sim.timeline_days.map((day) => {
+        const base = whatIfResult.baseline.composite_risk;
+        const target = whatIfResult.counterfactual.composite_risk;
+        if (day >= 30) return target;
+        return base + (target - base) * (day / 30);
+      })
+    : null;
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8 bg-slate-50/60 min-h-screen pb-24">
@@ -75,11 +91,18 @@ export default function SimulationPage() {
           scenarios={sim.scenarios}
           timelineDays={sim.timeline_days}
           projectedReduction={sim.projected_risk_reduction}
+          whatIfValues={whatIfLine}
         />
       </div>
 
       {/* ── 2b. INTERACTIVE WHAT-IF PREDICTOR ── */}
-      {userId && <WhatIfSimulator userId={userId} />}
+      {userId && <WhatIfSimulator userId={userId} onResult={setWhatIfResult} />}
+      {whatIfResult && (
+        <p className="text-xs text-slate-400 -mt-4 px-1">
+          The dashed blue <span className="font-semibold text-blue-600">What-If</span> line on the graph above
+          reflects the sliders you're currently moving.
+        </p>
+      )}
 
       {/* ── 3. THREE SCENARIO CARDS ── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -121,6 +144,24 @@ export default function SimulationPage() {
       </div>
 
       {/* ── 5. AGENTIC INTERVENTION PLAN ── */}
+      {/* This used to render nothing at all when the agent finished with
+          zero recommendations (e.g. the Recommendation Engine step failing
+          upstream, most commonly a Groq rate limit) — the whole section just
+          silently vanished with no explanation. Steps 1-3 can still produce
+          real, useful output (risk summary, memory, causal lever) even when
+          step 4 fails, so that partial result is shown honestly instead of
+          an empty page. */}
+      {agentDone && recs.length === 0 && (
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs text-center space-y-2">
+          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Synthesized Interventions</span>
+          <h3 className="text-base font-bold text-slate-900">Recommendation Step Didn't Complete</h3>
+          <p className="text-xs text-slate-500 font-medium max-w-md mx-auto">
+            The first 3 agent steps ran, but step 4 (Recommendation Engine) returned nothing —
+            most often because the AI provider is temporarily rate-limited. Your risk numbers above
+            are unaffected; only this synthesized action list is missing. Reloading later will retry it.
+          </p>
+        </div>
+      )}
       {agentDone && recs.length > 0 && (
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs animate-in fade-in duration-500 space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-100 pb-4">

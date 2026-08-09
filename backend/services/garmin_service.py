@@ -501,7 +501,7 @@ async def _upsert_day(user_id: str, cdate: str, core: Dict[str, Any], extras: Di
     return result["log_id"]
 
 
-async def backfill(user_id: str, days: int = 14) -> Dict[str, Any]:
+async def backfill(user_id: str, days: int = 30) -> Dict[str, Any]:
     """
     Pulls `days` of history and writes one health_logs row per day.
 

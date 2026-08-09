@@ -81,9 +81,21 @@ def _build_system_prompt(
     # Risk section
     if risk:
         score = round(float(risk["risk_score"]), 1)
+        # The UI shows this inverted everywhere (dashboard, mobile, PDF export)
+        # as a "Health Equilibrium" score — 100 - risk. Without this, the
+        # assistant would speak the raw risk number out loud while every
+        # screen shows its inverse, which is the one inconsistency a live
+        # conversation could actually surface mid-demo.
+        equilibrium = round(100 - score, 1)
         category = risk["risk_category"]
         top_factors = _pj(risk["top_risk_factors"], [])
-        risk_section = f"Risk Score: {score}/100 ({category})\nTop risk factors: {', '.join(top_factors)}"
+        risk_section = (
+            f"Health Equilibrium Score: {equilibrium}/100 ({category} risk category)\n"
+            f"(This is the same figure shown throughout the app — 100 minus the underlying risk score. "
+            f"Always refer to it as the Health Equilibrium score, not a risk score, and never state the "
+            f"raw risk number.)\n"
+            f"Top risk factors: {', '.join(top_factors)}"
+        )
     else:
         # Deliberately explicit rather than just "Not yet assessed" — found by
         # testing this end-to-end for a user with genuinely zero data anywhere
@@ -378,7 +390,7 @@ async def stream_chat(
 
     # Generate follow-up chips and store in mem0 concurrently
     risk = ctx.get("risk")
-    health_summary = f"risk={round(float(risk['risk_score']), 1)}/100" if risk else "no data"
+    health_summary = f"equilibrium={round(100 - float(risk['risk_score']), 1)}/100" if risk else "no data"
 
     chips, _ = await asyncio.gather(
         _generate_chips(message, full_reply, health_summary),

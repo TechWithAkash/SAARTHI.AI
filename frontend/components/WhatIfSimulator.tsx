@@ -24,12 +24,22 @@ const SLIDERS: SliderDef[] = [
 
 const DEBOUNCE_MS = 400;
 
-export default function WhatIfSimulator({ userId }: { userId: string }) {
+interface WhatIfSimulatorProps {
+  userId: string;
+  // Lets the parent page draw the projected value on the trajectory chart
+  // above, so moving a slider visibly connects to the graph instead of only
+  // updating the result cards in this card. Fires the real result, or null
+  // when there's nothing valid to plot (reset, not dirty, or a failed query).
+  onResult?: (result: WhatIfResponse | null) => void;
+}
+
+export default function WhatIfSimulator({ userId, onResult }: WhatIfSimulatorProps) {
   const [values, setValues] = useState<Record<string, number> | null>(null);
   const [baseline, setBaseline] = useState<Record<string, number> | null>(null);
   const [result, setResult] = useState<WhatIfResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [initError, setInitError] = useState<string | null>(null);
+  const [queryError, setQueryError] = useState<string | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Seed sliders from the user's real latest reading — not arbitrary
@@ -64,9 +74,13 @@ export default function WhatIfSimulator({ userId }: { userId: string }) {
 
     debounceRef.current = setTimeout(() => {
       setLoading(true);
+      setQueryError(null);
       api.postWhatIf(userId, values as WhatIfOverrides)
-        .then(setResult)
-        .catch(() => {})
+        .then((r) => { setResult(r); onResult?.(r); })
+        // This used to swallow every failure silently — moving a slider
+        // during a backend hiccup produced no spinner, no result, no
+        // message, just blank space. Now it says so.
+        .catch(() => { setQueryError("Couldn't calculate the projection — the backend may be busy. Try again in a moment."); onResult?.(null); })
         .finally(() => setLoading(false));
     }, DEBOUNCE_MS);
 
@@ -76,6 +90,8 @@ export default function WhatIfSimulator({ userId }: { userId: string }) {
 
   function handleReset() {
     if (baseline) setValues({ ...baseline });
+    setResult(null);
+    onResult?.(null);
   }
 
   const isDirty = values && baseline && SLIDERS.some((s) => values[s.key] !== baseline[s.key]);
@@ -158,6 +174,13 @@ export default function WhatIfSimulator({ userId }: { userId: string }) {
           <div className="flex items-center justify-center py-6 gap-2 text-slate-400">
             <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
             <span className="text-xs font-medium">Calculating…</span>
+          </div>
+        ) : queryError ? (
+          <div className="flex items-start gap-2 bg-rose-50 border border-rose-200 rounded-xl px-3.5 py-2.5">
+            <svg className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            </svg>
+            <p className="text-xs text-rose-800 leading-relaxed">{queryError}</p>
           </div>
         ) : result ? (
           <div className="space-y-4">

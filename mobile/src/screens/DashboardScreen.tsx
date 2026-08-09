@@ -109,16 +109,21 @@ export default function DashboardScreen() {
           {/* ── Hero: soft pastel card, the "most important thing right now" ── */}
           <View style={[styles.heroCard, { backgroundColor: colors.primarySoft }]}>
             <View style={styles.heroTopRow}>
-              <Text style={styles.heroEyebrow}>AI RISK ASSESSMENT</Text>
+              <Text style={styles.heroEyebrow}>HEALTH EQUILIBRIUM</Text>
               <View style={styles.heroIconWrap}>
                 <Ionicons name="sparkles" size={14} color={colors.primary} />
               </View>
             </View>
 
+            {/* Same computation as web's Health Equilibrium card: 100 - risk_score.
+                Identical underlying data to /risk, shown inverted as a positively-
+                framed score so both platforms match — this was flagged as an
+                inconsistency when mobile showed raw risk (14) and web showed the
+                inverted figure (86); now both show the inverted one. */}
             <View style={styles.heroRow}>
               <View>
                 <Text style={styles.score}>
-                  {risk.risk_score.toFixed(0)}
+                  {(100 - risk.risk_score).toFixed(0)}
                   <Text style={styles.scoreScale}>/100</Text>
                 </Text>
                 <View style={[styles.statusBadge, { backgroundColor: colorsFor.bg }]}>

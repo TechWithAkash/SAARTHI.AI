@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { MarkdownText } from "./MarkdownText";
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -227,10 +228,10 @@ export default function AuraChat() {
                       : "bg-white border border-gray-100 text-gray-800 shadow-sm rounded-tl-none"
                     }`}
                 >
-                  {m.content}
-                  {/* Streaming cursor */}
-                  {m.streaming && m.content && (
-                    <span className="inline-block w-1 h-3.5 bg-gray-400 rounded-sm animate-pulse ml-0.5 align-middle" />
+                  {m.role === "assistant" ? (
+                    <MarkdownText text={m.content} streaming={m.streaming} />
+                  ) : (
+                    m.content
                   )}
                 </div>
               </div>

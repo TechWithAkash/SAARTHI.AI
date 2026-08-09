@@ -1,0 +1,69 @@
+[
+  {
+    "condition": "diabetes",
+    "status": "ok",
+    "auc": 0.9279,
+    "n_train": 3243,
+    "n_test": 1081,
+    "prevalence": 0.1511,
+    "features": [
+      "age",
+      "gender",
+      "bmi",
+      "waist",
+      "hba1c",
+      "systolic_bp",
+      "diastolic_bp",
+      "whr",
+      "sleep_hours",
+      "sugar_intake_g",
+      "PAD680"
+    ],
+    "citation": "Machine Learning-Based Prediction Model for Type 2 Diabetes Mellitus (Archives of Medical Science, NHANES-based)",
+    "model_path": "/Users/roshanajith/Downloads/ml_training/models/diabetes_nhanes.pkl"
+  },
+  {
+    "condition": "hypertension",
+    "status": "ok",
+    "auc": 0.7885,
+    "n_train": 3328,
+    "n_test": 1110,
+    "prevalence": 0.3546,
+    "features": [
+      "age",
+      "gender",
+      "bmi",
+      "waist",
+      "hba1c",
+      "whr",
+      "sleep_hours",
+      "sugar_intake_g",
+      "PAD680"
+    ],
+    "citation": "Development of a hypertension risk prediction model, NHANES + Stacking (Frontiers in Cardiovascular Medicine)",
+    "model_path": "/Users/roshanajith/Downloads/ml_training/models/hypertension_nhanes.pkl"
+  },
+  {
+    "condition": "cvd",
+    "status": "ok",
+    "auc": 0.7727,
+    "n_train": 3243,
+    "n_test": 1081,
+    "prevalence": 0.1088,
+    "features": [
+      "age",
+      "gender",
+      "bmi",
+      "waist",
+      "hba1c",
+      "systolic_bp",
+      "diastolic_bp",
+      "whr",
+      "sleep_hours",
+      "sugar_intake_g",
+      "PAD680"
+    ],
+    "citation": "No pre-vetted NHANES+ML paper for this exact setup \u2014 cite the ICMRRuleScorer's own Framingham/INTERHEART grounding if a citation is needed for the CVD number.",
+    "model_path": "/Users/roshanajith/Downloads/ml_training/models/cvd_nhanes.pkl"
+  }
+]

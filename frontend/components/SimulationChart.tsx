@@ -15,14 +15,20 @@ interface Props {
   scenarios: { current: number[]; improved: number[]; optimal: number[] };
   timelineDays: number[];
   projectedReduction: { improved: number; optimal: number };
+  // Live what-if projection from the slider tool below this chart — plotted
+  // as a dashed line so it visibly connects to the graph instead of only
+  // updating its own result cards. One value per entry in timelineDays;
+  // omitted entirely (no line, no legend entry) until a slider is moved.
+  whatIfValues?: number[] | null;
 }
 
-export default function SimulationChart({ scenarios, timelineDays, projectedReduction }: Props) {
+export default function SimulationChart({ scenarios, timelineDays, projectedReduction, whatIfValues }: Props) {
   const data = timelineDays.map((day, i) => ({
     day: `Day ${day}`,
     Current: Math.round(scenarios.current[i] ?? 0),
     Improved: Math.round(scenarios.improved[i] ?? 0),
     Optimal: Math.round(scenarios.optimal[i] ?? 0),
+    ...(whatIfValues ? { "What-If": Math.round(whatIfValues[i] ?? 0) } : {}),
   }));
 
   return (
@@ -58,6 +64,9 @@ export default function SimulationChart({ scenarios, timelineDays, projectedRedu
           <Line type="monotone" dataKey="Current" stroke="#D1D5DB" strokeWidth={2} dot={false} />
           <Line type="monotone" dataKey="Improved" stroke="#86EFAC" strokeWidth={2.5} dot={false} />
           <Line type="monotone" dataKey="Optimal" stroke="#22C55E" strokeWidth={2.5} dot={false} />
+          {whatIfValues && (
+            <Line type="monotone" dataKey="What-If" stroke="#2563EB" strokeWidth={2.5} strokeDasharray="5 4" dot={false} />
+          )}
         </LineChart>
       </ResponsiveContainer>
     </div>
