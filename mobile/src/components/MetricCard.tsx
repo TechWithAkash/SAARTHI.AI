@@ -2,6 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { STATUS_STYLES, type MetricStatus } from '../utils/metricRanges';
+import { colors, radius, type } from '../theme';
+
+interface PastelTone {
+  bg: string;
+  fg: string;
+  icon: string;
+}
 
 interface MetricCardProps {
   icon: keyof typeof Ionicons.glyphMap;
@@ -10,7 +17,10 @@ interface MetricCardProps {
   unit?: string;
   status?: MetricStatus;
   iconColor?: string;
-  notMeasured?: boolean; // when true, shows an honest "not tracked today" state instead of a value
+  notMeasured?: boolean; // when true, shows an honest "not tracked yet" state instead of a value
+  compact?: boolean;
+  pastel?: PastelTone; // when set, the card becomes a flat pastel tile instead of a white bordered one
+  asOf?: string; // set when the value shown isn't from today — e.g. "Aug 7" — never hide the fact it's not current
 }
 
 export default function MetricCard({
@@ -19,36 +29,55 @@ export default function MetricCard({
   value,
   unit,
   status = 'neutral',
-  iconColor = '#2563EB',
+  iconColor = colors.primary,
   notMeasured = false,
+  compact = false,
+  pastel,
+  asOf,
 }: MetricCardProps) {
   const style = STATUS_STYLES[status];
+  const isPastel = !!pastel;
 
   return (
-    <View style={styles.card}>
+    <View
+      style={[
+        styles.card,
+        compact && styles.cardCompact,
+        isPastel && { backgroundColor: pastel!.bg, borderWidth: 0 },
+      ]}
+    >
       <View style={styles.topRow}>
-        <View style={[styles.iconWrap, { backgroundColor: `${iconColor}14` }]}>
-          <Ionicons name={icon} size={16} color={iconColor} />
+        <Text style={[styles.label, isPastel && { color: pastel!.fg, opacity: 0.75 }]} numberOfLines={1}>{label}</Text>
+        <View style={[styles.iconWrap, { backgroundColor: isPastel ? 'rgba(255,255,255,0.55)' : `${iconColor}14` }]}>
+          <Ionicons name={icon} size={13} color={isPastel ? pastel!.icon : iconColor} />
         </View>
-        {!notMeasured && status !== 'neutral' && (
-          <View style={[styles.pill, { backgroundColor: style.bg }]}>
-            <Text style={[styles.pillText, { color: style.color }]}>{style.label}</Text>
-          </View>
-        )}
       </View>
 
       {notMeasured ? (
         <>
-          <Text style={styles.dash}>—</Text>
-          <Text style={styles.notMeasuredText}>Not tracked today</Text>
+          <Text style={[styles.dash, isPastel && { color: pastel!.fg, opacity: 0.35 }]}>—</Text>
+          <Text style={[styles.notMeasuredText, isPastel && { color: pastel!.fg, opacity: 0.6 }]}>Not tracked yet</Text>
         </>
       ) : (
-        <Text style={styles.value} numberOfLines={1} adjustsFontSizeToFit>
-          {value}
-          {unit ? <Text style={styles.unit}> {unit}</Text> : null}
-        </Text>
+        <>
+          <Text style={[styles.value, isPastel && { color: pastel!.fg }]} numberOfLines={1} adjustsFontSizeToFit>
+            {value}
+            {unit ? <Text style={[styles.unit, isPastel && { color: pastel!.fg, opacity: 0.6 }]}> {unit}</Text> : null}
+          </Text>
+          <View style={styles.bottomRow}>
+            {!isPastel && status !== 'neutral' && (
+              <View style={[styles.pill, { backgroundColor: style.bg }]}>
+                <Text style={[styles.pillText, { color: style.color }]}>{style.label}</Text>
+              </View>
+            )}
+            {asOf && (
+              <Text style={[styles.asOf, isPastel && { color: pastel!.fg, opacity: 0.55 }]} numberOfLines={1}>
+                as of {asOf}
+              </Text>
+            )}
+          </View>
+        </>
       )}
-      <Text style={styles.label}>{label}</Text>
     </View>
   );
 }
@@ -56,22 +85,22 @@ export default function MetricCard({
 const styles = StyleSheet.create({
   card: {
     flexBasis: '48%',
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.04,
-    shadowRadius: 10,
-    elevation: 2,
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
-  topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 },
-  iconWrap: { width: 30, height: 30, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
-  pill: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8 },
-  pillText: { fontSize: 9, fontWeight: '800', letterSpacing: 0.3 },
-  value: { fontSize: 22, fontWeight: '900', color: '#111827' },
-  unit: { fontSize: 12, fontWeight: '700', color: '#9CA3AF' },
+  cardCompact: { padding: 10, borderRadius: radius.md },
+  topRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10, gap: 6 },
+  iconWrap: { width: 24, height: 24, borderRadius: 8, alignItems: 'center', justifyContent: 'center' },
+  pill: { paddingHorizontal: 7, paddingVertical: 2, borderRadius: 7 },
+  pillText: { fontSize: 8.5, fontWeight: '800', letterSpacing: 0.2 },
+  value: { fontSize: 22, fontWeight: '900', color: colors.textPrimary },
+  unit: { fontSize: 11, fontWeight: '700', color: colors.textTertiary },
   dash: { fontSize: 22, fontWeight: '900', color: '#D1D5DB' },
-  notMeasuredText: { fontSize: 10, color: '#B0B7C3', fontWeight: '600', marginTop: 2 },
-  label: { fontSize: 11, fontWeight: '700', color: '#6B7280', marginTop: 6 },
+  notMeasuredText: { fontSize: 9.5, color: colors.textTertiary, fontWeight: '600', marginTop: 2 },
+  label: { ...type.micro, fontSize: 10.5, color: colors.textSecondary, flexShrink: 1 },
+  bottomRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 5 },
+  asOf: { fontSize: 9.5, fontWeight: '600', color: colors.textTertiary },
 });

@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import {
   fetchHealthTimeline,
@@ -12,46 +13,45 @@ import {
 import SectionHeader from '../components/SectionHeader';
 import MetricCard from '../components/MetricCard';
 import TrendChart from '../components/TrendChart';
+import Sparkline from '../components/Sparkline';
+import SegmentedControl from '../components/SegmentedControl';
+import Card from '../components/Card';
+import LiveStatus from '../components/LiveStatus';
+import { LoadingState, EmptyState, ErrorState } from '../components/ScreenStates';
 import {
-  restingHeartRateStatus,
-  stepsStatus,
-  sleepStatus,
-  stressStatus,
-  spo2Status,
-  respirationStatus,
-  bmiStatus,
+  restingHeartRateStatus, stepsStatus, sleepStatus, stressStatus, spo2Status, respirationStatus, bmiStatus,
 } from '../utils/metricRanges';
+import { shortDate, relativeSync, latestMeasured } from '../utils/timeline';
+import { colors, spacing, pastel, type } from '../theme';
 
 const DEFAULT_USER = 'user_demo_001';
-const RANGE_OPTIONS = [7, 14, 30] as const;
+const RANGE_OPTIONS = ['7D', '14D', '30D'] as const;
+const RANGE_DAYS: Record<(typeof RANGE_OPTIONS)[number], number> = { '7D': 7, '14D': 14, '30D': 30 };
 
-function shortDate(iso: string): string {
-  const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' }).replace(' ', '\n');
-}
-
-function trendFor(
-  days: HealthDay[],
-  extract: (d: HealthDay) => number | null,
-  measuredCheck: (d: HealthDay) => boolean
-) {
-  const points = days.filter(measuredCheck).map((d) => ({ label: shortDate(d.date), value: extract(d) as number }));
-  return { labels: points.map((p) => p.label), data: points.map((p) => p.value) };
-}
+const CORE_METRICS = [
+  { key: 'heart_rate', label: 'Heart Rate', icon: 'heart' as const, unit: 'bpm', color: '220, 38, 38', tone: pastel.heartRate },
+  { key: 'steps', label: 'Steps', icon: 'walk' as const, unit: 'steps', color: '37, 99, 235', tone: pastel.steps },
+  { key: 'sleep', label: 'Sleep', icon: 'moon' as const, unit: 'hrs', color: '124, 58, 237', tone: pastel.sleep },
+  { key: 'stress_level', label: 'Stress', icon: 'pulse' as const, unit: '/10', color: '217, 119, 6', tone: pastel.stress },
+] as const;
+type CoreKey = (typeof CORE_METRICS)[number]['key'];
 
 export default function HealthDataScreen() {
+  const tabBarHeight = useBottomTabBarHeight();
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [days, setDays] = useState<HealthDay[]>([]);
   const [status, setStatus] = useState<GarminStatus | null>(null);
-  const [rangeDays, setRangeDays] = useState<(typeof RANGE_OPTIONS)[number]>(14);
+  const [range, setRange] = useState<(typeof RANGE_OPTIONS)[number]>('14D');
   const [error, setError] = useState<string | null>(null);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState<CoreKey>('heart_rate');
 
-  const load = useCallback(async (range: number) => {
+  const load = useCallback(async (rangeDays: number) => {
     try {
       setError(null);
       const [timeline, s] = await Promise.all([
-        fetchHealthTimeline(DEFAULT_USER, range),
+        fetchHealthTimeline(DEFAULT_USER, rangeDays),
         fetchGarminStatus(DEFAULT_USER),
       ]);
       setDays(timeline.days);
@@ -66,175 +66,188 @@ export default function HealthDataScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      load(rangeDays);
-    }, [load, rangeDays])
+      load(RANGE_DAYS[range]);
+    }, [load, range])
   );
 
   const onRefresh = () => {
     setRefreshing(true);
-    load(rangeDays);
+    load(RANGE_DAYS[range]);
   };
 
-  const latest = days.length > 0 ? days[days.length - 1] : null;
+  const latestDay = days.length > 0 ? days[days.length - 1] : null;
 
-  const trends = useMemo(() => {
-    if (days.length === 0) return null;
-    return {
-      heart_rate: trendFor(days, (d) => d.heart_rate, (d) => isFieldMeasured(d, 'heart_rate')),
-      steps: trendFor(days, (d) => d.steps, (d) => isFieldMeasured(d, 'steps')),
-      sleep: trendFor(days, (d) => d.sleep, (d) => isFieldMeasured(d, 'sleep')),
-      stress: trendFor(days, (d) => d.stress_level, (d) => isFieldMeasured(d, 'stress_level')),
+  const trendsByKey = useMemo(() => {
+    const out: Record<CoreKey, { labels: string[]; data: number[] }> = {
+      heart_rate: { labels: [], data: [] },
+      steps: { labels: [], data: [] },
+      sleep: { labels: [], data: [] },
+      stress_level: { labels: [], data: [] },
     };
+    for (const key of Object.keys(out) as CoreKey[]) {
+      const points = days
+        .filter((d) => isFieldMeasured(d, key))
+        .map((d) => ({ label: shortDate(d.date), value: (d as any)[key] as number }));
+      out[key] = { labels: points.map((p) => p.label), data: points.map((p) => p.value) };
+    }
+    return out;
   }, [days]);
 
-  const lastSyncLabel = status?.last_sync?.last_synced_at
-    ? new Date(status.last_sync.last_synced_at).toLocaleString(undefined, {
-        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-      })
-    : null;
+  const coreReadings = useMemo(
+    () =>
+      CORE_METRICS.map((m) => ({
+        ...m,
+        reading: latestMeasured(days, (d) => (d as any)[m.key], (d) => isFieldMeasured(d, m.key)),
+      })),
+    [days]
+  );
+
+  const secondaryDefs = [
+    { icon: 'body' as const, label: 'BMI', unit: undefined as string | undefined, color: '#0EA5E9',
+      extract: (d: HealthDay) => d.bmi, measured: (d: HealthDay) => isFieldMeasured(d, 'bmi'),
+      status: (v: number) => bmiStatus(v), round: 1 },
+    { icon: 'analytics' as const, label: 'HRV (RMSSD)', unit: 'ms', color: '#16A34A',
+      extract: (d: HealthDay) => d.extras.hrv_rmssd, measured: (d: HealthDay) => d.extras.hrv_rmssd != null,
+      status: null, round: 0 },
+    { icon: 'water' as const, label: 'Blood Oxygen', unit: '%', color: '#0EA5E9',
+      extract: (d: HealthDay) => d.extras.spo2_avg, measured: (d: HealthDay) => d.extras.spo2_avg != null,
+      status: (v: number) => spo2Status(v), round: 0 },
+    { icon: 'cloud' as const, label: 'Respiration', unit: 'brpm', color: '#059669',
+      extract: (d: HealthDay) => d.extras.respiration_avg, measured: (d: HealthDay) => d.extras.respiration_avg != null,
+      status: (v: number) => respirationStatus(v), round: 0 },
+    { icon: 'battery-charging' as const, label: 'Battery Charged', unit: 'pts', color: '#16A34A',
+      extract: (d: HealthDay) => d.extras.body_battery_charged, measured: (d: HealthDay) => d.extras.body_battery_charged != null,
+      status: null, round: 0 },
+    { icon: 'battery-half' as const, label: 'Battery Drained', unit: 'pts', color: '#DC2626',
+      extract: (d: HealthDay) => d.extras.body_battery_drained, measured: (d: HealthDay) => d.extras.body_battery_drained != null,
+      status: null, round: 0 },
+  ];
+
+  const secondaryReadings = useMemo(
+    () =>
+      secondaryDefs
+        .map((def) => ({ def, reading: latestMeasured(days, def.extract, def.measured) }))
+        .filter((r) => r.reading != null),
+    [days]
+  );
+
+  const activeMetricDef = CORE_METRICS.find((m) => m.key === selectedMetric)!;
+  const activeTrend = trendsByKey[selectedMetric];
 
   return (
     <ScrollView
       style={styles.container}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#2563EB" />}
+      contentContainerStyle={[styles.content, { paddingBottom: tabBarHeight + 20 }]}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.primary} />}
     >
       <View style={styles.header}>
         <Text style={styles.title}>Health Data</Text>
-        <View style={styles.syncRow}>
-          <View style={[styles.liveDot, { backgroundColor: status?.tokens_cached ? '#16A34A' : '#D97706' }]} />
-          <Text style={styles.syncText}>
-            {lastSyncLabel ? `Synced from Garmin · ${lastSyncLabel}` : 'Waiting for first sync'}
-          </Text>
-        </View>
+        <LiveStatus live={!!status?.tokens_cached} label={relativeSync(status?.last_sync?.last_synced_at)} />
       </View>
 
       {loading ? (
-        <View style={styles.centerState}>
-          <ActivityIndicator color="#2563EB" />
-        </View>
+        <LoadingState label="Loading synced data…" />
       ) : error ? (
-        <View style={styles.centerState}>
-          <Ionicons name="cloud-offline-outline" size={28} color="#CBD5E1" />
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      ) : !latest ? (
-        <View style={styles.centerState}>
-          <Ionicons name="watch-outline" size={28} color="#CBD5E1" />
-          <Text style={styles.errorText}>No synced data yet — sync Garmin data from the Sync tab first.</Text>
-        </View>
+        <ErrorState message={error} />
+      ) : !latestDay ? (
+        <EmptyState title="No synced data yet" subtitle="Sync Garmin data from the Sync tab first." />
       ) : (
         <>
-          {/* ── Raw Garmin data — today's readings ─────────────────────── */}
-          <View style={styles.card}>
+          {/* ── Raw Garmin data — most recent real reading per metric ──── */}
+          <View style={styles.sectionHeaderOnly}>
+            <SectionHeader icon="watch-outline" title="Your Vitals" subtitle="Most recent reading — each metric syncs on its own schedule" tint={colors.primary} />
+          </View>
+          <View style={styles.grid}>
+            {coreReadings.map((m) => {
+              const r = m.reading;
+              const value =
+                r == null ? 0 : m.key === 'steps' ? Math.round(r.value as number).toLocaleString() : (r.value as number).toFixed(m.key === 'heart_rate' ? 0 : 1);
+              const statusFn = m.key === 'heart_rate' ? restingHeartRateStatus : m.key === 'steps' ? stepsStatus : m.key === 'sleep' ? sleepStatus : stressStatus;
+              return (
+                <MetricCard
+                  key={m.key}
+                  icon={m.icon}
+                  label={m.label}
+                  value={value}
+                  unit={m.unit}
+                  pastel={m.tone}
+                  notMeasured={r == null}
+                  status={r != null ? statusFn(r.value as number) : 'neutral'}
+                  asOf={r && !r.isLatestDay ? shortDate(r.date) : undefined}
+                />
+              );
+            })}
+          </View>
+
+          {secondaryReadings.length > 0 && (
+            <Card style={[styles.card, { marginTop: spacing.md }]} tight>
+              <TouchableOpacity style={styles.moreToggle} onPress={() => setMoreOpen((v) => !v)} activeOpacity={0.7}>
+                <Text style={styles.moreToggleText}>
+                  {moreOpen ? 'Hide' : 'Show'} {secondaryReadings.length} more metric{secondaryReadings.length > 1 ? 's' : ''}
+                </Text>
+                <Ionicons name={moreOpen ? 'chevron-up' : 'chevron-down'} size={14} color={colors.primary} />
+              </TouchableOpacity>
+              {moreOpen && (
+                <View style={[styles.grid, { marginTop: spacing.sm }]}>
+                  {secondaryReadings.map(({ def, reading }, i) => {
+                    const v = reading!.value as number;
+                    return (
+                      <MetricCard
+                        key={i}
+                        icon={def.icon}
+                        label={def.label}
+                        value={def.round === 0 ? Math.round(v) : v.toFixed(def.round)}
+                        unit={def.unit}
+                        iconColor={def.color}
+                        status={def.status ? def.status(v) : 'neutral'}
+                        asOf={!reading!.isLatestDay ? shortDate(reading!.date) : undefined}
+                        compact
+                      />
+                    );
+                  })}
+                </View>
+              )}
+            </Card>
+          )}
+
+          {/* ── Historical trends — overview always visible, one full chart on demand ── */}
+          <Card style={[styles.card, { marginTop: spacing.lg }]}>
             <SectionHeader
-              icon="watch-outline"
-              title="Today's Readings"
-              subtitle="Straight from your Garmin device — nothing estimated"
-              tint="#2563EB"
+              icon="trending-up-outline"
+              title="Trends"
+              subtitle="Gaps mean nothing was measured that day"
+              tint={colors.purple}
+              right={
+                <SegmentedControl<(typeof RANGE_OPTIONS)[number]>
+                  options={RANGE_OPTIONS}
+                  value={range}
+                  onChange={setRange}
+                />
+              }
             />
-            <View style={styles.grid}>
-              <MetricCard
-                icon="heart"
-                label="Heart Rate"
-                value={Math.round(latest.heart_rate ?? 0)}
-                unit="bpm"
-                iconColor="#DC2626"
-                notMeasured={!isFieldMeasured(latest, 'heart_rate')}
-                status={latest.heart_rate != null ? restingHeartRateStatus(latest.heart_rate) : 'neutral'}
-              />
-              <MetricCard
-                icon="walk"
-                label="Steps"
-                value={(latest.steps ?? 0).toLocaleString()}
-                iconColor="#2563EB"
-                notMeasured={!isFieldMeasured(latest, 'steps')}
-                status={latest.steps != null ? stepsStatus(latest.steps) : 'neutral'}
-              />
-              <MetricCard
-                icon="moon"
-                label="Sleep"
-                value={latest.sleep != null ? latest.sleep.toFixed(1) : 0}
-                unit="hrs"
-                iconColor="#7C3AED"
-                notMeasured={!isFieldMeasured(latest, 'sleep')}
-                status={latest.sleep != null ? sleepStatus(latest.sleep) : 'neutral'}
-              />
-              <MetricCard
-                icon="pulse"
-                label="Stress"
-                value={latest.stress_level != null ? latest.stress_level.toFixed(1) : 0}
-                unit="/10"
-                iconColor="#D97706"
-                notMeasured={!isFieldMeasured(latest, 'stress_level')}
-                status={latest.stress_level != null ? stressStatus(latest.stress_level) : 'neutral'}
-              />
-              {isFieldMeasured(latest, 'bmi') && (
-                <MetricCard
-                  icon="body"
-                  label="BMI"
-                  value={latest.bmi!.toFixed(1)}
-                  iconColor="#0EA5E9"
-                  status={bmiStatus(latest.bmi!)}
-                />
-              )}
-              {latest.extras.hrv_rmssd != null && (
-                <MetricCard icon="analytics" label="HRV (RMSSD)" value={Math.round(latest.extras.hrv_rmssd)} unit="ms" iconColor="#16A34A" />
-              )}
-              {latest.extras.spo2_avg != null && (
-                <MetricCard
-                  icon="water"
-                  label="Blood Oxygen"
-                  value={Math.round(latest.extras.spo2_avg)}
-                  unit="%"
-                  iconColor="#0EA5E9"
-                  status={spo2Status(latest.extras.spo2_avg)}
-                />
-              )}
-              {latest.extras.respiration_avg != null && (
-                <MetricCard
-                  icon="cloud"
-                  label="Respiration"
-                  value={Math.round(latest.extras.respiration_avg)}
-                  unit="brpm"
-                  iconColor="#059669"
-                  status={respirationStatus(latest.extras.respiration_avg)}
-                />
-              )}
-              {latest.extras.body_battery_charged != null && (
-                <MetricCard icon="battery-charging" label="Body Battery Charged" value={Math.round(latest.extras.body_battery_charged)} unit="pts" iconColor="#16A34A" />
-              )}
-              {latest.extras.body_battery_drained != null && (
-                <MetricCard icon="battery-half" label="Body Battery Drained" value={Math.round(latest.extras.body_battery_drained)} unit="pts" iconColor="#DC2626" />
-              )}
-            </View>
-            <Text style={styles.dateCaption}>{new Date(latest.date + 'T00:00:00').toDateString()}</Text>
-          </View>
 
-          {/* ── Historical trends ───────────────────────────────────────── */}
-          <View style={styles.card}>
-            <SectionHeader icon="trending-up-outline" title="Trends" subtitle="Real readings only — gaps mean nothing was measured" tint="#7C3AED" />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.sparkRow}>
+              {CORE_METRICS.map((m) => {
+                const t = trendsByKey[m.key];
+                const latestVal = t.data.length > 0 ? t.data[t.data.length - 1] : null;
+                const display = latestVal == null ? '—' : m.key === 'steps' ? Math.round(latestVal).toLocaleString() : latestVal.toFixed(m.key === 'heart_rate' ? 0 : 1);
+                return (
+                  <TouchableOpacity key={m.key} onPress={() => setSelectedMetric(m.key)} activeOpacity={0.75}>
+                    <Sparkline
+                      label={m.label}
+                      value={`${display} ${display === '—' ? '' : m.unit}`}
+                      data={t.data}
+                      color={`rgb(${m.color})`}
+                      active={selectedMetric === m.key}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
 
-            <View style={styles.rangeToggle}>
-              {RANGE_OPTIONS.map((opt) => (
-                <TouchableOpacity
-                  key={opt}
-                  style={[styles.rangeBtn, rangeDays === opt && styles.rangeBtnActive]}
-                  onPress={() => setRangeDays(opt)}
-                >
-                  <Text style={[styles.rangeBtnText, rangeDays === opt && styles.rangeBtnTextActive]}>{opt}D</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            {trends && (
-              <>
-                <TrendChart title="Heart Rate" labels={trends.heart_rate.labels} data={trends.heart_rate.data} color="220, 38, 38" unit="bpm" />
-                <TrendChart title="Steps" labels={trends.steps.labels} data={trends.steps.data} color="37, 99, 235" unit="steps" />
-                <TrendChart title="Sleep" labels={trends.sleep.labels} data={trends.sleep.data} color="124, 58, 237" unit="hrs" />
-                <TrendChart title="Stress" labels={trends.stress.labels} data={trends.stress.data} color="217, 119, 6" unit="/10" />
-              </>
-            )}
-          </View>
+            <View style={styles.divider} />
+            <TrendChart title={`${activeMetricDef.label} · ${range}`} labels={activeTrend.labels} data={activeTrend.data} color={activeMetricDef.color} unit={activeMetricDef.unit} widthOffset={72} />
+          </Card>
         </>
       )}
     </ScrollView>
@@ -242,23 +255,15 @@ export default function HealthDataScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9fafb', padding: 20 },
-  header: { marginTop: 40, marginBottom: 20 },
-  title: { fontSize: 28, fontWeight: '900', color: '#111827', marginBottom: 8 },
-  syncRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  liveDot: { width: 6, height: 6, borderRadius: 3 },
-  syncText: { fontSize: 12, color: '#6B7280', fontWeight: '600' },
-  centerState: { alignItems: 'center', justifyContent: 'center', paddingVertical: 60, gap: 10 },
-  errorText: { color: '#9CA3AF', fontSize: 13, textAlign: 'center', paddingHorizontal: 30 },
-  card: {
-    backgroundColor: '#ffffff', borderRadius: 24, padding: 20, marginBottom: 16,
-    shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.05, shadowRadius: 20, elevation: 5,
-  },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  dateCaption: { fontSize: 11, color: '#B0B7C3', marginTop: 14, textAlign: 'right', fontWeight: '600' },
-  rangeToggle: { flexDirection: 'row', backgroundColor: '#F3F4F6', borderRadius: 12, padding: 3, marginBottom: 18, alignSelf: 'flex-start' },
-  rangeBtn: { paddingHorizontal: 16, paddingVertical: 6, borderRadius: 9 },
-  rangeBtnActive: { backgroundColor: '#ffffff', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.08, shadowRadius: 3, elevation: 1 },
-  rangeBtnText: { fontSize: 12, fontWeight: '700', color: '#9CA3AF' },
-  rangeBtnTextActive: { color: '#2563EB' },
+  container: { flex: 1, backgroundColor: colors.bg },
+  content: { padding: spacing.lg, paddingTop: 54 },
+  header: { marginBottom: spacing.lg, gap: 6 },
+  title: { ...type.h1, fontSize: 22 },
+  sectionHeaderOnly: { marginBottom: 2 },
+  card: { marginBottom: spacing.md },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  moreToggle: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 2 },
+  moreToggleText: { fontSize: 12, fontWeight: '700', color: colors.primary },
+  sparkRow: { gap: spacing.sm, paddingBottom: 4 },
+  divider: { height: 1, backgroundColor: colors.border, marginVertical: spacing.md },
 });

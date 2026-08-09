@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
+import { colors } from '../theme';
 
 // Apple Health-style activity ring, repurposed to show a single disease risk
 // percentage at a glance. Deliberately simple — one ring, one number, one
@@ -13,8 +14,8 @@ interface RiskRingProps {
   size?: number;
 }
 
-export default function RiskRing({ label, value, color, size = 76 }: RiskRingProps) {
-  const strokeWidth = 7;
+export default function RiskRing({ label, value, color, size = 64 }: RiskRingProps) {
+  const strokeWidth = 6;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const pct = value == null ? 0 : Math.max(0, Math.min(100, value));
@@ -24,14 +25,7 @@ export default function RiskRing({ label, value, color, size = 76 }: RiskRingPro
     <View style={styles.wrap}>
       <View style={{ width: size, height: size }}>
         <Svg width={size} height={size}>
-          <Circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            stroke="#F1F5F9"
-            strokeWidth={strokeWidth}
-            fill="none"
-          />
+          <Circle cx={size / 2} cy={size / 2} r={radius} stroke={colors.surfaceAlt} strokeWidth={strokeWidth} fill="none" />
           {value != null && (
             <Circle
               cx={size / 2}
@@ -50,7 +44,7 @@ export default function RiskRing({ label, value, color, size = 76 }: RiskRingPro
         </Svg>
         <View style={StyleSheet.absoluteFill}>
           <View style={styles.centerLabel}>
-            <Text style={[styles.value, { color: value == null ? '#CBD5E1' : '#111827' }]}>
+            <Text style={[styles.value, { color: value == null ? '#CBD5E1' : colors.textPrimary }]}>
               {value == null ? '—' : Math.round(value)}
             </Text>
           </View>
@@ -64,6 +58,6 @@ export default function RiskRing({ label, value, color, size = 76 }: RiskRingPro
 const styles = StyleSheet.create({
   wrap: { alignItems: 'center', flex: 1 },
   centerLabel: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  value: { fontSize: 18, fontWeight: '800' },
-  label: { fontSize: 11, fontWeight: '600', color: '#6B7280', marginTop: 8, textAlign: 'center' },
+  value: { fontSize: 15, fontWeight: '800' },
+  label: { fontSize: 10.5, fontWeight: '700', color: colors.textSecondary, marginTop: 6, textAlign: 'center' },
 });

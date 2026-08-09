@@ -3,36 +3,49 @@ import { View, Text, StyleSheet, ScrollView, RefreshControl, Image, Dimensions, 
 import { LineChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { fetchRiskScore, fetchRiskHistory, fetchGarminStatus, type RiskResponse, type GarminStatus } from '../services/api';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import {
+  fetchRiskScore, fetchRiskHistory, fetchGarminStatus, fetchHealthTimeline,
+  isFieldMeasured, type RiskResponse, type GarminStatus, type HealthDay,
+} from '../services/api';
 import RiskRing from '../components/RiskRing';
-import SectionHeader from '../components/SectionHeader';
+import MetricCard from '../components/MetricCard';
+import Card from '../components/Card';
+import LiveStatus from '../components/LiveStatus';
+import { LoadingState, EmptyState } from '../components/ScreenStates';
 import { getRiskColors, getScoreColor } from '../utils/riskColors';
+import { restingHeartRateStatus, stepsStatus } from '../utils/metricRanges';
+import { relativeSync, latestMeasured, shortDate } from '../utils/timeline';
+import { colors, spacing, radius, pastel, type } from '../theme';
 
 const screenWidth = Dimensions.get('window').width;
 const DEFAULT_USER = 'user_demo_001';
 
 export default function DashboardScreen() {
   const navigation = useNavigation<any>();
+  const tabBarHeight = useBottomTabBarHeight();
   const [loading, setLoading] = useState(true);
   const [risk, setRisk] = useState<RiskResponse | null>(null);
   const [history, setHistory] = useState<number[]>([]);
   const [hasData, setHasData] = useState(true);
   const [garminStatus, setGarminStatus] = useState<GarminStatus | null>(null);
+  const [days, setDays] = useState<HealthDay[]>([]);
 
   const loadData = async () => {
     try {
       setLoading(true);
-      const [riskData, s] = await Promise.all([
+      const [riskData, s, timeline] = await Promise.all([
         fetchRiskScore(DEFAULT_USER),
         fetchGarminStatus(DEFAULT_USER).catch(() => null),
+        fetchHealthTimeline(DEFAULT_USER, 7).catch(() => null),
       ]);
       setRisk(riskData);
       setHasData(true);
       setGarminStatus(s);
+      if (timeline) setDays(timeline.days);
 
       const historyData = await fetchRiskHistory(DEFAULT_USER);
       if (historyData && historyData.length > 0) {
-        // Keep last 6 for mobile chart legibility
         setHistory(historyData.slice(0, 6).reverse().map((d: any) => d.risk_score));
       }
     } catch (e: any) {
@@ -52,153 +65,205 @@ export default function DashboardScreen() {
     }, [])
   );
 
-  const colors = getRiskColors(risk?.risk_category);
-  const lastSyncLabel = garminStatus?.last_sync?.last_synced_at
-    ? new Date(garminStatus.last_sync.last_synced_at).toLocaleString(undefined, {
-        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-      })
-    : null;
+  const colorsFor = getRiskColors(risk?.risk_category);
+  const stepsReading = latestMeasured(days, (d) => d.steps, (d) => isFieldMeasured(d, 'steps'));
+  const hrReading = latestMeasured(days, (d) => d.heart_rate, (d) => isFieldMeasured(d, 'heart_rate'));
 
   return (
     <ScrollView
       style={styles.container}
-      refreshControl={<RefreshControl refreshing={loading} onRefresh={loadData} tintColor="#2563EB" />}
+      contentContainerStyle={[styles.content, { paddingBottom: tabBarHeight + 20 }]}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={loadData} tintColor={colors.primary} />}
     >
       <View style={styles.header}>
-        <View style={styles.logoRow}>
-          <Image source={require('../../assets/logo.png')} style={styles.logo} />
-          <Text style={styles.logoText}>SAARTHI<Text style={styles.logoAccent}>.AI</Text></Text>
-        </View>
-        <Text style={styles.badge}>SAARTHI HEALTH GUIDE</Text>
-        <Text style={styles.title}>Personalized <Text style={styles.highlight}>Foresight</Text></Text>
-        {lastSyncLabel && (
-          <View style={styles.syncRow}>
-            <View style={[styles.liveDot, { backgroundColor: garminStatus?.tokens_cached ? '#16A34A' : '#D97706' }]} />
-            <Text style={styles.syncText}>Live from Garmin · updated {lastSyncLabel}</Text>
+        <View style={styles.brandRow}>
+          <Image source={require('../../assets/logo.png')} style={styles.avatar} />
+          <View>
+            <Text style={styles.welcome}>Welcome back</Text>
+            {/* No login system exists — there's no app-side profile name to
+                show. The Garmin account itself has a real one (display_name,
+                already flowing through /garmin/status), so that's used
+                instead of a fabricated username or the brand name standing
+                in for a person. */}
+            <Text style={styles.brandText} numberOfLines={1}>
+              {garminStatus?.last_sync?.display_name ?? (
+                <>SAARTHI<Text style={styles.brandAccent}>.AI</Text></>
+              )}
+            </Text>
           </View>
-        )}
+        </View>
+        <LiveStatus live={!!garminStatus?.tokens_cached} label={relativeSync(garminStatus?.last_sync?.last_synced_at)} />
       </View>
 
-      {risk ? (
+      <Text style={styles.headline}>How's Your Health Today?</Text>
+
+      {loading && !risk ? (
+        <LoadingState label="Loading your health twin…" />
+      ) : !risk ? (
+        <EmptyState
+          title={!hasData ? 'No risk data yet' : 'Something went wrong'}
+          subtitle={!hasData ? 'Sync Garmin data from the Sync tab to get started.' : 'Pull down to try again.'}
+        />
+      ) : (
         <>
-          <View style={styles.card}>
-            <SectionHeader icon="sparkles-outline" title="AI Risk Assessment" subtitle="Generated from your synced health data" tint="#2563EB" />
-            <Text style={styles.score}>{risk.risk_score.toFixed(0)}<Text style={styles.scoreScale}>/100</Text></Text>
-            <View style={[styles.statusBadge, { backgroundColor: colors.bg }]}>
-              <Text style={[styles.statusText, { color: colors.text }]}>{risk.risk_category}</Text>
+          {/* ── Hero: soft pastel card, the "most important thing right now" ── */}
+          <View style={[styles.heroCard, { backgroundColor: colors.primarySoft }]}>
+            <View style={styles.heroTopRow}>
+              <Text style={styles.heroEyebrow}>AI RISK ASSESSMENT</Text>
+              <View style={styles.heroIconWrap}>
+                <Ionicons name="sparkles" size={14} color={colors.primary} />
+              </View>
+            </View>
+
+            <View style={styles.heroRow}>
+              <View>
+                <Text style={styles.score}>
+                  {risk.risk_score.toFixed(0)}
+                  <Text style={styles.scoreScale}>/100</Text>
+                </Text>
+                <View style={[styles.statusBadge, { backgroundColor: colorsFor.bg }]}>
+                  <Text style={[styles.statusText, { color: colorsFor.text }]}>{risk.risk_category}</Text>
+                </View>
+              </View>
+
+              {risk.top_risk_factors && risk.top_risk_factors.length > 0 && (
+                <View style={styles.driversBlock}>
+                  {risk.top_risk_factors.slice(0, 3).map((factor, i) => (
+                    <View key={i} style={styles.driverChip}>
+                      <Text style={styles.driverChipText} numberOfLines={1}>{factor.replace(/_/g, ' ')}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
 
             {risk.model_saturated && (
               <View style={styles.cautionBanner}>
-                <Ionicons name="alert-circle-outline" size={16} color="#B45309" />
-                <Text style={styles.cautionText}>
-                  Inputs are outside the model's normal range — treat this score as low-confidence.
-                </Text>
-              </View>
-            )}
-
-            {risk.top_risk_factors && risk.top_risk_factors.length > 0 && (
-              <View style={styles.factorsList}>
-                <Text style={styles.factorsTitle}>TOP RISK DRIVERS</Text>
-                {risk.top_risk_factors.map((factor, i) => (
-                  <Text key={i} style={styles.factorItem}>• {factor.replace(/_/g, ' ')}</Text>
-                ))}
+                <Ionicons name="alert-circle-outline" size={13} color={colors.warning} />
+                <Text style={styles.cautionText}>Inputs are outside the model's normal range — treat this as low-confidence.</Text>
               </View>
             )}
           </View>
 
+          {/* ── Vitals teaser — same pattern shown fully on the Vitals tab ── */}
+          <Text style={styles.sectionTitle}>Your Vitals</Text>
+          <View style={styles.vitalsRow}>
+            <MetricCard
+              icon="walk" label="Daily Steps"
+              value={stepsReading ? Math.round(stepsReading.value).toLocaleString() : 0}
+              notMeasured={!stepsReading}
+              status={stepsReading ? stepsStatus(stepsReading.value) : 'neutral'}
+              asOf={stepsReading && !stepsReading.isLatestDay ? shortDate(stepsReading.date) : undefined}
+              pastel={pastel.steps}
+            />
+            <MetricCard
+              icon="heart" label="Heart Rate" unit="bpm"
+              value={hrReading ? Math.round(hrReading.value) : 0}
+              notMeasured={!hrReading}
+              status={hrReading ? restingHeartRateStatus(hrReading.value) : 'neutral'}
+              asOf={hrReading && !hrReading.isLatestDay ? shortDate(hrReading.date) : undefined}
+              pastel={pastel.heartRate}
+            />
+          </View>
+
           {(risk.diabetes_risk != null || risk.cvd_risk != null || risk.hypertension_risk != null) && (
-            <View style={styles.card}>
-              <SectionHeader icon="body-outline" title="At A Glance" subtitle="Disease-specific risk, same model" tint="#7C3AED" />
+            <Card style={styles.card} tight>
+              <Text style={styles.cardLabel}>DISEASE RISK — AT A GLANCE</Text>
               <View style={styles.ringsRow}>
                 <RiskRing label="Diabetes" value={risk.diabetes_risk} color={getScoreColor(risk.diabetes_risk)} />
                 <RiskRing label="Cardiovascular" value={risk.cvd_risk} color={getScoreColor(risk.cvd_risk)} />
                 <RiskRing label="Hypertension" value={risk.hypertension_risk} color={getScoreColor(risk.hypertension_risk)} />
               </View>
-            </View>
+            </Card>
           )}
 
           {history.length > 0 && (
-            <View style={styles.card}>
-              <SectionHeader icon="trending-up-outline" title="Risk Trajectory" subtitle="Composite score, most recent readings" tint="#16A34A" />
+            <Card style={styles.card} tight>
+              <Text style={styles.cardLabel}>RISK TRAJECTORY</Text>
               <LineChart
-                data={{
-                  labels: history.map((_, i) => `d-${history.length - i}`),
-                  datasets: [{ data: history }],
-                }}
+                data={{ labels: history.map((_, i) => `d-${history.length - i}`), datasets: [{ data: history }] }}
                 width={screenWidth - 72}
-                height={180}
+                height={120}
                 chartConfig={{
-                  backgroundColor: '#ffffff',
-                  backgroundGradientFrom: '#ffffff',
-                  backgroundGradientTo: '#ffffff',
+                  backgroundColor: colors.surface,
+                  backgroundGradientFrom: colors.surface,
+                  backgroundGradientTo: colors.surface,
                   decimalPlaces: 0,
                   color: (opacity = 1) => `rgba(37, 99, 235, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(156, 163, 175, ${opacity})`,
-                  style: { borderRadius: 16 },
-                  propsForDots: { r: '4', strokeWidth: '2', stroke: '#2563EB' },
-                  propsForBackgroundLines: { stroke: '#F1F5F9' },
+                  labelColor: (opacity = 1) => `rgba(148, 163, 184, ${opacity})`,
+                  style: { borderRadius: 12 },
+                  propsForDots: { r: '3', strokeWidth: '2', stroke: colors.primary },
+                  propsForBackgroundLines: { stroke: colors.border },
                 }}
                 bezier
                 style={styles.chart}
               />
-            </View>
+            </Card>
           )}
 
-          <View style={styles.navCardsRow}>
-            <TouchableOpacity style={styles.navCard} onPress={() => navigation.navigate('HealthData')} activeOpacity={0.85}>
-              <Ionicons name="analytics-outline" size={20} color="#2563EB" />
-              <Text style={styles.navCardTitle}>Raw Health Data</Text>
-              <Text style={styles.navCardSub}>Steps, HR, sleep & trends</Text>
+          {/* ── Quick actions — icon-grid, matches every real destination in the app ── */}
+          <Text style={styles.sectionTitle}>Explore</Text>
+          <View style={styles.actionsGrid}>
+            <TouchableOpacity style={styles.actionTile} onPress={() => navigation.navigate('HealthData')} activeOpacity={0.75}>
+              <View style={[styles.actionIcon, { backgroundColor: colors.primarySoft }]}>
+                <Ionicons name="analytics-outline" size={18} color={colors.primary} />
+              </View>
+              <Text style={styles.actionTileLabel}>Vitals</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.navCard} onPress={() => navigation.navigate('Assistant')} activeOpacity={0.85}>
-              <Ionicons name="chatbubble-ellipses-outline" size={20} color="#7C3AED" />
-              <Text style={styles.navCardTitle}>Ask the AI</Text>
-              <Text style={styles.navCardSub}>About your risk & trends</Text>
+            <TouchableOpacity style={styles.actionTile} onPress={() => navigation.navigate('Assistant')} activeOpacity={0.75}>
+              <View style={[styles.actionIcon, { backgroundColor: colors.purpleSoft }]}>
+                <Ionicons name="chatbubble-ellipses-outline" size={18} color={colors.purple} />
+              </View>
+              <Text style={styles.actionTileLabel}>Ask AI</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionTile} onPress={() => navigation.navigate('Sync')} activeOpacity={0.75}>
+              <View style={[styles.actionIcon, { backgroundColor: colors.successSoft }]}>
+                <Ionicons name="watch-outline" size={18} color={colors.success} />
+              </View>
+              <Text style={styles.actionTileLabel}>Sync</Text>
             </TouchableOpacity>
           </View>
         </>
-      ) : (
-        <View style={styles.emptyState}>
-          <Ionicons name="watch-outline" size={32} color="#CBD5E1" />
-          <Text style={styles.infoText}>
-            {loading ? 'Loading your health twin…' : !hasData ? 'No risk data yet — sync Garmin data first.' : 'Something went wrong loading your data.'}
-          </Text>
-        </View>
       )}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9fafb', padding: 20 },
-  header: { marginTop: 40, marginBottom: 20, alignItems: 'center' },
-  logoRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 14 },
-  logo: { width: 36, height: 36, borderRadius: 10 },
-  logoText: { fontSize: 20, fontWeight: '900', color: '#111827', letterSpacing: 2 },
-  logoAccent: { color: '#2563EB' },
-  badge: { fontSize: 10, fontWeight: 'bold', color: '#16A34A', backgroundColor: '#ECFDF5', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 20, overflow: 'hidden', marginBottom: 10 },
-  title: { fontSize: 28, fontWeight: '900', color: '#111827' },
-  highlight: { color: '#22C55E' },
-  syncRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 10 },
-  liveDot: { width: 6, height: 6, borderRadius: 3 },
-  syncText: { fontSize: 11, color: '#9CA3AF', fontWeight: '600' },
-  card: { backgroundColor: '#ffffff', borderRadius: 24, padding: 24, shadowColor: '#000', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.05, shadowRadius: 20, elevation: 5, marginBottom: 16 },
-  score: { fontSize: 64, fontWeight: '900', color: '#111827', marginBottom: 10 },
-  scoreScale: { fontSize: 24, fontWeight: '700', color: '#D1D5DB' },
-  statusBadge: { alignSelf: 'flex-start', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12, marginBottom: 16 },
-  statusText: { fontWeight: 'bold', fontSize: 14, textTransform: 'uppercase' },
-  cautionBanner: { flexDirection: 'row', alignItems: 'flex-start', gap: 8, backgroundColor: '#FFFBEB', borderRadius: 12, padding: 12, marginBottom: 16 },
-  cautionText: { flex: 1, fontSize: 12, color: '#92400E', lineHeight: 17 },
-  factorsList: { borderTopWidth: 1, borderTopColor: '#F3F4F6', paddingTop: 16 },
-  factorsTitle: { fontSize: 11, fontWeight: 'bold', color: '#6B7280', marginBottom: 8 },
-  factorItem: { fontSize: 14, color: '#374151', marginBottom: 4, textTransform: 'capitalize' },
-  ringsRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 },
-  chart: { borderRadius: 16, marginLeft: -16 },
-  navCardsRow: { flexDirection: 'row', gap: 12, marginBottom: 40 },
-  navCard: { flex: 1, backgroundColor: '#ffffff', borderRadius: 20, padding: 16, gap: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.04, shadowRadius: 10, elevation: 2 },
-  navCardTitle: { fontSize: 13, fontWeight: '800', color: '#111827', marginTop: 6 },
-  navCardSub: { fontSize: 11, color: '#9CA3AF' },
-  emptyState: { backgroundColor: '#ffffff', borderRadius: 24, padding: 32, alignItems: 'center', gap: 10, marginBottom: 16 },
-  infoText: { textAlign: 'center', color: '#6B7280', fontSize: 13 },
+  container: { flex: 1, backgroundColor: colors.bg },
+  content: { padding: spacing.lg, paddingTop: 54 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: spacing.lg },
+  brandRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  avatar: { width: 38, height: 38, borderRadius: 19 },
+  welcome: { fontSize: 11, color: colors.textTertiary, fontWeight: '600' },
+  brandText: { fontSize: 15, fontWeight: '900', color: colors.textPrimary, letterSpacing: 0.3, marginTop: 1 },
+  brandAccent: { color: colors.primary },
+  headline: { fontSize: 25, fontWeight: '900', color: colors.textPrimary, lineHeight: 30, marginBottom: spacing.lg },
+
+  heroCard: { borderRadius: radius.lg + 4, padding: spacing.lg, marginBottom: spacing.lg },
+  heroTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 },
+  heroEyebrow: { fontSize: 10.5, fontWeight: '800', letterSpacing: 0.6, color: colors.primary, opacity: 0.75 },
+  heroIconWrap: { width: 26, height: 26, borderRadius: 13, backgroundColor: 'rgba(255,255,255,0.65)', alignItems: 'center', justifyContent: 'center' },
+  heroRow: { flexDirection: 'row', gap: spacing.lg },
+  score: { fontSize: 44, fontWeight: '900', color: colors.textPrimary },
+  scoreScale: { fontSize: 17, fontWeight: '700', color: 'rgba(15,23,42,0.3)' },
+  statusBadge: { alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, marginTop: 6 },
+  statusText: { fontWeight: '800', fontSize: 12, textTransform: 'uppercase', letterSpacing: 0.3 },
+  driversBlock: { flex: 1, justifyContent: 'center', gap: 6 },
+  driverChip: { backgroundColor: 'rgba(255,255,255,0.65)', borderRadius: 8, paddingHorizontal: 9, paddingVertical: 6 },
+  driverChipText: { fontSize: 10.5, fontWeight: '700', color: colors.textPrimary, textTransform: 'capitalize' },
+  cautionBanner: { flexDirection: 'row', alignItems: 'flex-start', gap: 6, backgroundColor: 'rgba(255,255,255,0.65)', borderRadius: radius.sm, padding: 10, marginTop: 14 },
+  cautionText: { flex: 1, fontSize: 11, color: '#92400E', lineHeight: 15 },
+
+  sectionTitle: { fontSize: 15, fontWeight: '800', color: colors.textPrimary, marginBottom: 10 },
+  vitalsRow: { flexDirection: 'row', gap: spacing.sm, marginBottom: spacing.lg },
+  card: { marginBottom: spacing.md },
+  cardLabel: { ...type.eyebrow, marginBottom: 10 },
+  ringsRow: { flexDirection: 'row', justifyContent: 'space-between' },
+  chart: { borderRadius: 12, marginLeft: -16 },
+
+  actionsGrid: { flexDirection: 'row', gap: spacing.sm },
+  actionTile: { flex: 1, backgroundColor: colors.surface, borderRadius: radius.lg, borderWidth: 1, borderColor: colors.border, paddingVertical: 16, alignItems: 'center', gap: 8 },
+  actionIcon: { width: 36, height: 36, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  actionTileLabel: { fontSize: 11.5, fontWeight: '800', color: colors.textPrimary },
 });

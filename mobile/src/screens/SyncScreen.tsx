@@ -1,8 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { fetchGarminStatus, syncGarmin, isTimeoutError, type GarminStatus } from '../services/api';
+import Card from '../components/Card';
+import LiveStatus from '../components/LiveStatus';
+import { colors, radius, spacing, type } from '../theme';
 
 const DEFAULT_USER = 'user_demo_001';
 
@@ -14,10 +18,12 @@ const DEFAULT_USER = 'user_demo_001';
 // is just to trigger that and show what happened — no native health SDK, no
 // entitlements, no Apple Developer account needed.
 export default function SyncScreen() {
+  const tabBarHeight = useBottomTabBarHeight();
   const [status, setStatus] = useState<GarminStatus | null>(null);
   const [statusLoading, setStatusLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [logs, setLogs] = useState<string[]>([]);
+  const [logsOpen, setLogsOpen] = useState(false);
 
   const addLog = (msg: string) => {
     setLogs((prev) => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...prev]);
@@ -44,6 +50,7 @@ export default function SyncScreen() {
   const handleSync = async () => {
     if (!status?.configured) return;
     setSyncing(true);
+    setLogsOpen(true);
     addLog('Requesting sync from backend…');
     addLog('Pulling real data from Garmin — this can take up to a minute.');
 
@@ -74,30 +81,32 @@ export default function SyncScreen() {
     ? 'Connected'
     : 'Ready — Not Synced';
 
-  const connectionColor = !status?.configured ? '#9CA3AF' : status.tokens_cached ? '#16A34A' : '#D97706';
+  const connectionColor = !status?.configured ? colors.textTertiary : status.tokens_cached ? colors.success : colors.warning;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={[styles.content, { paddingBottom: tabBarHeight + 20 }]}>
       <View style={styles.header}>
         <Text style={styles.title}>Data Sync</Text>
         <Text style={styles.subtitle}>Real wearable data, synced server-side</Text>
       </View>
 
-      <View style={styles.card}>
+      <Card style={styles.card}>
         <View style={styles.row}>
           <View style={styles.deviceIcon}>
-            <Ionicons name="watch" size={20} color="#2563EB" />
+            <Ionicons name="watch" size={18} color={colors.primary} />
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.cardTitle}>Garmin Connect</Text>
-            <Text style={styles.cardDesc}>
-              {status?.last_sync?.last_synced_at
-                ? `Last synced ${new Date(status.last_sync.last_synced_at).toLocaleString()}`
-                : 'No sync recorded yet'}
-            </Text>
+            <LiveStatus
+              live={!!status?.tokens_cached}
+              label={
+                status?.last_sync?.last_synced_at
+                  ? `Last synced ${new Date(status.last_sync.last_synced_at).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`
+                  : 'No sync recorded yet'
+              }
+            />
           </View>
           <View style={[styles.statusPill, { backgroundColor: `${connectionColor}18` }]}>
-            <View style={[styles.statusDot, { backgroundColor: connectionColor }]} />
             <Text style={[styles.statusPillText, { color: connectionColor }]}>{connectionLabel}</Text>
           </View>
         </View>
@@ -105,7 +114,15 @@ export default function SyncScreen() {
         {status && !status.configured && (
           <Text style={styles.hintText}>{status.hint ?? 'Garmin credentials are not configured on the backend yet.'}</Text>
         )}
-      </View>
+
+        {status && (
+          <View style={styles.metaRow}>
+            <Text style={styles.metaText}>{status.last_sync?.days_synced ?? 0} days synced</Text>
+            <View style={styles.metaDot} />
+            <Text style={styles.metaText}>{status.garmin_rows_in_db ?? 0} rows stored</Text>
+          </View>
+        )}
+      </Card>
 
       <TouchableOpacity
         style={[styles.syncButton, (!status?.configured || syncing) && styles.syncButtonDisabled]}
@@ -115,48 +132,61 @@ export default function SyncScreen() {
       >
         {syncing ? (
           <>
-            <ActivityIndicator color="#ffffff" />
+            <ActivityIndicator color="#ffffff" size="small" />
             <Text style={styles.syncButtonText}>SYNCING…</Text>
           </>
         ) : (
           <>
-            <Ionicons name="sync" size={16} color="#ffffff" />
+            <Ionicons name="sync" size={15} color="#ffffff" />
             <Text style={styles.syncButtonText}>SYNC GARMIN DATA</Text>
           </>
         )}
       </TouchableOpacity>
 
-      <View style={styles.terminalContainer}>
-        <Text style={styles.terminalTitle}>SYNC LIFECYCLE LOGS</Text>
-        <ScrollView style={styles.terminal}>
-          {logs.map((L, i) => <Text key={i} style={styles.logText}>{L}</Text>)}
-          {logs.length === 0 && <Text style={styles.logTextIdle}>Awaiting user sequence...</Text>}
-        </ScrollView>
-      </View>
-    </View>
+      <TouchableOpacity style={styles.logsToggle} onPress={() => setLogsOpen((v) => !v)} activeOpacity={0.7}>
+        <Text style={styles.logsToggleText}>
+          {logsOpen ? 'Hide' : 'Show'} sync logs {logs.length > 0 ? `(${logs.length})` : ''}
+        </Text>
+        <Ionicons name={logsOpen ? 'chevron-up' : 'chevron-down'} size={14} color={colors.textSecondary} />
+      </TouchableOpacity>
+
+      {logsOpen && (
+        <View style={styles.terminalContainer}>
+          <ScrollView style={styles.terminal}>
+            {logs.map((L, i) => (
+              <Text key={i} style={styles.logText}>{L}</Text>
+            ))}
+            {logs.length === 0 && <Text style={styles.logTextIdle}>Awaiting user sequence...</Text>}
+          </ScrollView>
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9fafb', padding: 20 },
-  header: { marginTop: 40, marginBottom: 30 },
-  title: { fontSize: 32, fontWeight: '900', color: '#111827' },
-  subtitle: { fontSize: 14, color: '#6B7280', marginTop: 4 },
-  card: { backgroundColor: '#ffffff', borderRadius: 24, padding: 20, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.03, shadowRadius: 10, elevation: 2, marginBottom: 20 },
-  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
-  deviceIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: '#EFF6FF', alignItems: 'center', justifyContent: 'center' },
-  cardTitle: { fontSize: 16, fontWeight: 'bold', color: '#111827' },
-  cardDesc: { fontSize: 12, color: '#6B7280', marginTop: 2 },
-  statusPill: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 20 },
-  statusDot: { width: 6, height: 6, borderRadius: 3 },
-  statusPillText: { fontSize: 11, fontWeight: '700' },
-  hintText: { fontSize: 11, color: '#9CA3AF', marginTop: 12, lineHeight: 16 },
-  syncButton: { flexDirection: 'row', gap: 8, backgroundColor: '#111827', borderRadius: 100, paddingVertical: 18, alignItems: 'center', justifyContent: 'center', shadowColor: '#111827', shadowOffset: { width: 0, height: 10 }, shadowOpacity: 0.2, shadowRadius: 15, elevation: 5, marginBottom: 30 },
+  container: { flex: 1, backgroundColor: colors.bg },
+  content: { padding: spacing.lg, paddingTop: 54, paddingBottom: 32, flexGrow: 1 },
+  header: { marginBottom: spacing.lg },
+  title: { ...type.h1, fontSize: 22 },
+  subtitle: { fontSize: 12, color: colors.textTertiary, marginTop: 3, fontWeight: '600' },
+  card: { marginBottom: spacing.md },
+  row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 10 },
+  deviceIcon: { width: 36, height: 36, borderRadius: 11, backgroundColor: colors.primarySoft, alignItems: 'center', justifyContent: 'center' },
+  cardTitle: { fontSize: 14, fontWeight: '800', color: colors.textPrimary, marginBottom: 3 },
+  statusPill: { paddingHorizontal: 9, paddingVertical: 5, borderRadius: 8 },
+  statusPillText: { fontSize: 10.5, fontWeight: '800' },
+  hintText: { fontSize: 11, color: colors.textTertiary, marginTop: 10, lineHeight: 15 },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.border },
+  metaText: { fontSize: 11, color: colors.textSecondary, fontWeight: '600' },
+  metaDot: { width: 3, height: 3, borderRadius: 1.5, backgroundColor: colors.textTertiary },
+  syncButton: { flexDirection: 'row', gap: 8, backgroundColor: colors.textPrimary, borderRadius: radius.pill, paddingVertical: 15, alignItems: 'center', justifyContent: 'center', marginBottom: spacing.md },
   syncButtonDisabled: { opacity: 0.4 },
-  syncButtonText: { color: '#ffffff', fontWeight: '900', letterSpacing: 1.5, fontSize: 13 },
-  terminalContainer: { flex: 1, backgroundColor: '#1F2937', borderRadius: 16, padding: 16, overflow: 'hidden' },
-  terminalTitle: { color: '#9CA3AF', fontSize: 10, fontWeight: '900', letterSpacing: 2, marginBottom: 12 },
+  syncButtonText: { color: '#ffffff', fontWeight: '900', letterSpacing: 1.2, fontSize: 12.5 },
+  logsToggle: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 8, marginBottom: spacing.sm },
+  logsToggleText: { fontSize: 12, fontWeight: '700', color: colors.textSecondary },
+  terminalContainer: { flex: 1, minHeight: 160, backgroundColor: '#1F2937', borderRadius: radius.md, padding: spacing.md, overflow: 'hidden' },
   terminal: { flex: 1 },
-  logText: { color: '#86EFAC', fontFamily: 'Menlo', fontSize: 11, marginBottom: 6 },
-  logTextIdle: { color: '#4B5563', fontFamily: 'Menlo', fontSize: 11, fontStyle: 'italic' },
+  logText: { color: '#86EFAC', fontFamily: 'Menlo', fontSize: 10.5, marginBottom: 5 },
+  logTextIdle: { color: '#4B5563', fontFamily: 'Menlo', fontSize: 10.5, fontStyle: 'italic' },
 });

@@ -10,7 +10,7 @@ import json
 import asyncio
 from typing import AsyncGenerator, List, Dict, Optional
 
-from groq import AsyncGroq
+from groq import AsyncGroq, RateLimitError, APIConnectionError, APITimeoutError
 
 from backend.config import settings
 from backend.db.postgres import get_db
@@ -359,6 +359,18 @@ async def stream_chat(
                 full_reply += delta
                 yield _sse({"type": "token", "content": delta})
 
+    except RateLimitError as e:
+        # A real, external constraint (Groq's free-tier daily token quota),
+        # not a bug — the generic "temporarily unavailable" message this used
+        # to fall through to made it look broken instead of just rate-capped
+        # for the day. Named here so it's honest about what's actually true.
+        print(f"[chat_service] Groq rate limit: {e}")
+        yield _sse({"type": "error", "message": "Darpan has hit its daily AI usage limit. This resets on its own — please try again in a little while."})
+        return
+    except (APIConnectionError, APITimeoutError) as e:
+        print(f"[chat_service] Groq connection error: {e}")
+        yield _sse({"type": "error", "message": "Couldn't reach the AI service — check your connection and try again."})
+        return
     except Exception as e:
         print(f"[chat_service] stream error: {e}")
         yield _sse({"type": "error", "message": "Darpan is temporarily unavailable. Please try again."})
