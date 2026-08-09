@@ -64,6 +64,69 @@ export const fetchLatestHealth = async (userId: string) => {
   return response.data;
 };
 
+// ── Health timeline (real per-day history, DB-only — never calls Garmin) ────
+// Every field the backend actually stores, including `extras` (hrv_rmssd,
+// spo2_avg, respiration_avg, body_battery, weight_kg) and, critically,
+// `measured_fields` / `defaulted_fields` — the backend's own record of which
+// numbers on a Garmin day came from the device vs. an app fallback default.
+// A UI must gate on `measured_fields` (for source: 'garmin' rows) rather than
+// show every non-null number as real — several fields here are silently
+// defaulted (e.g. diet_score, which Garmin has no food log for at all).
+
+export interface HealthDayExtras {
+  hrv_rmssd?: number | null;
+  spo2_avg?: number | null;
+  respiration_avg?: number | null;
+  body_battery_charged?: number | null;
+  body_battery_drained?: number | null;
+  weight_kg?: number | null;
+  measured_fields?: string[] | null; // only present for source: 'garmin'
+  defaulted_fields?: string[] | null;
+  garmin_date?: string;
+  [key: string]: unknown;
+}
+
+export interface HealthDay {
+  date: string; // "YYYY-MM-DD"
+  timestamp: string;
+  source: 'garmin' | 'manual' | string;
+  heart_rate: number | null;
+  steps: number | null;
+  sleep: number | null;
+  bmi: number | null;
+  stress_level: number | null;
+  diet_score: number | null;
+  systolic_bp: number | null;
+  diastolic_bp: number | null;
+  blood_oxygen: number | null;
+  active_minutes: number | null;
+  water_intake_ml: number | null;
+  extras: HealthDayExtras;
+}
+
+export interface HealthTimeline {
+  user_id: string;
+  days: HealthDay[]; // oldest first
+}
+
+export const fetchHealthTimeline = async (userId: string, days = 30): Promise<HealthTimeline> => {
+  const response = await apiClient.get(`/health-data/${encodeURIComponent(userId)}/timeline`, {
+    params: { days },
+  });
+  return response.data;
+};
+
+// A field counts as a real, device-measured reading only if the row says so.
+// Manual entries have no measured_fields list at all — every non-null value
+// on a manual row was typed in directly by the user, so it's trusted as-is.
+export function isFieldMeasured(day: HealthDay, field: string): boolean {
+  if (day[field as keyof HealthDay] == null) return false;
+  if (day.source !== 'garmin') return true;
+  const measured = day.extras?.measured_fields;
+  if (!measured) return false;
+  return measured.includes(field);
+}
+
 // ── Risk ─────────────────────────────────────────────────────────────────────
 
 export interface RiskResponse {
@@ -148,3 +211,84 @@ export const syncGarmin = async (userId: string, days = 14): Promise<GarminSyncR
 // when the backend may well still be completing the sync in the background.
 export const isTimeoutError = (e: any): boolean =>
   e?.code === 'ECONNABORTED' || /timeout/i.test(e?.message ?? '');
+
+// ── AI chat (same /chat/stream SSE endpoint the web app's assistant uses —
+// context (risk, SHAP, causal chain, guideline RAG, personal mem0 memory) is
+// already built server-side per user_id; this is just a client for it) ──────
+//
+// It's Server-Sent Events, and React Native's fetch() doesn't reliably expose
+// a readable streaming body across Hermes/Expo Go the way a browser does —
+// the standard, dependency-free workaround (same one react-native-sse uses
+// internally) is XMLHttpRequest: xhr.responseText grows as bytes arrive, and
+// `onprogress` fires on each chunk, so reading only the newly-appended slice
+// each time reconstructs the stream without pulling in a native module.
+
+export interface ChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export interface ChatStreamHandlers {
+  onToken: (content: string) => void;
+  onDone: (chips: string[]) => void;
+  onError: (message: string) => void;
+}
+
+export function streamChat(
+  userId: string,
+  message: string,
+  history: ChatMessage[],
+  handlers: ChatStreamHandlers,
+  docSessionId?: string
+): () => void {
+  const xhr = new XMLHttpRequest();
+  let cursor = 0;
+  let buffer = '';
+
+  const processNewData = () => {
+    const newChunk = xhr.responseText.slice(cursor);
+    cursor = xhr.responseText.length;
+    if (!newChunk) return;
+    buffer += newChunk;
+
+    // SSE events are separated by a blank line; the last split segment may
+    // be an event that hasn't fully arrived yet — hold it for the next pass.
+    const parts = buffer.split('\n\n');
+    buffer = parts.pop() ?? '';
+
+    for (const raw of parts) {
+      const line = raw.trim();
+      if (!line.startsWith('data:')) continue;
+      const jsonStr = line.slice(5).trim();
+      if (!jsonStr) continue;
+      try {
+        const evt = JSON.parse(jsonStr);
+        if (evt.type === 'token') handlers.onToken(evt.content ?? '');
+        else if (evt.type === 'done') handlers.onDone(evt.chips ?? []);
+        else if (evt.type === 'error') handlers.onError(evt.message ?? 'Something went wrong.');
+      } catch {
+        // Shouldn't happen once an event has a full blank-line terminator —
+        // if it does, drop just that malformed fragment, not the connection.
+      }
+    }
+  };
+
+  xhr.open('POST', `${API_BASE_URL}/chat/stream`);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onprogress = processNewData;
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      processNewData();
+      if (xhr.status !== 200 && xhr.status !== 0) {
+        handlers.onError(`Connection failed (HTTP ${xhr.status}).`);
+      }
+    }
+  };
+  xhr.onerror = () => handlers.onError('Network error — check the backend connection.');
+  xhr.timeout = 45000;
+  xhr.ontimeout = () => handlers.onError('The assistant took too long to respond.');
+
+  xhr.send(JSON.stringify({ user_id: userId, message, history, doc_session_id: docSessionId }));
+
+  return () => xhr.abort();
+}

@@ -249,3 +249,55 @@ async def get_latest_health_data(user_id: str):
     if not row:
         raise HTTPException(status_code=404, detail="No health data found")
     return dict(row)
+
+
+@router.get("/health-data/{user_id}/timeline")
+async def get_health_timeline(user_id: str, days: int = 30):
+    """
+    Read-only, additive endpoint: one row per calendar day (latest submission
+    wins) covering every raw field health_logs stores, `extras` included —
+    hrv_rmssd, spo2_avg, respiration_avg, body_battery, plus which fields were
+    device-measured vs app-defaulted that day. Built for a client that needs
+    real per-day history to chart (trends, ranges), not just the single
+    latest row `/health-data/{user_id}` returns.
+
+    Does not call Garmin — reads only what's already synced into Postgres, so
+    it's safe to poll from a UI without touching login/rate limits. Added
+    alongside the existing endpoint rather than extending it, so nothing
+    already depending on that response shape is affected.
+
+    Same one-row-per-calendar-day dedup already used for risk/causal/explain
+    history reads (DISTINCT ON), so a day with several manual re-submissions
+    doesn't count as several days here either.
+    """
+    days = max(1, min(int(days), 90))
+    pool = get_db()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch(
+            """
+            SELECT DISTINCT ON ((timestamp AT TIME ZONE 'UTC')::date)
+                (timestamp AT TIME ZONE 'UTC')::date AS date,
+                timestamp, source, heart_rate, steps, sleep, bmi,
+                stress_level, diet_score, systolic_bp, diastolic_bp,
+                blood_oxygen, active_minutes, water_intake_ml, extras
+            FROM health_logs
+            WHERE user_id = $1
+            ORDER BY (timestamp AT TIME ZONE 'UTC')::date DESC, timestamp DESC
+            LIMIT $2
+            """,
+            user_id, days,
+        )
+    days_out = []
+    for r in rows:
+        d = dict(r)
+        d["date"] = d["date"].isoformat()
+        d["timestamp"] = d["timestamp"].isoformat()
+        extras = d.get("extras")
+        if isinstance(extras, str):
+            import json
+            extras = json.loads(extras) if extras else {}
+        d["extras"] = extras or {}
+        days_out.append(d)
+    # Oldest first — natural chart/reading order
+    days_out.reverse()
+    return {"user_id": user_id, "days": days_out}
