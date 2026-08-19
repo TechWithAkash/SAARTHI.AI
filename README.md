@@ -398,8 +398,3 @@ SAARTHI.AI's clinical thresholds and benchmark models are informed by published 
 
 ---
 
-<div align="center">
-
-Made with ❤️ by **Team Refactor** · Powered by FastAPI, Next.js, PyTorch & Groq.
-
-</div>
