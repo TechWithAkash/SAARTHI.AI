@@ -39,7 +39,13 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    # localhost for continued local dev + the known production Vercel alias,
+    # plus every Vercel preview deployment for this project (a new
+    # <hash>-techwithakashs-projects.vercel.app subdomain gets minted on
+    # every deploy) — a fixed origin list would silently break the very next
+    # deploy.
+    allow_origins=["http://localhost:3000", "https://saarthi-ai-lovat.vercel.app"],
+    allow_origin_regex=r"https://saarthi.*-techwithakashs-projects\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
